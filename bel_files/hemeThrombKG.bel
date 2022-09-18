@@ -1,0 +1,3222 @@
+#######################
+# Document Properties #
+#######################
+
+SET DOCUMENT Licenses    = "MIT License"
+SET DOCUMENT ContactInfo = "sara.diaz.delser@scai.fraunhofer.de"
+
+SET DOCUMENT Name        = "heme_thrombosis.bel"
+SET DOCUMENT Version     = "1.0.0"
+SET DOCUMENT Authors     = "Sara Diaz del Ser"
+SET DOCUMENT Description = "Extension of HemeKG for thrombosis from Linking Labile Heme with Thrombosis (33499296)."
+
+##############
+# Namespaces #
+##############
+
+# Namespaces hosted on https://github.com/pharmacome/terminology
+# --------------------------------------------------------------
+DEFINE NAMESPACE CHEBI          AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/chebi-names.belns"
+DEFINE NAMESPACE DRUGBANK       AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/drugbank-names.belns"
+DEFINE NAMESPACE ECCODE         AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/ec-code.belns"
+# DEFINE NAMESPACE FB           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/80171ae62cf43aa1fc8a6c326b94537ab342458c/external/fb-names.belns"
+DEFINE NAMESPACE HBP            AS URL "https://raw.githubusercontent.com/pharmacome/terminology/3074b85b858455d8eeb76cfcdef685ced19bbe11/export/hbp-names.belns"
+DEFINE NAMESPACE HGNC           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/hgnc-names.belns"
+DEFINE NAMESPACE HGNCGENEFAMILY AS URL "https://raw.githubusercontent.com/pharmacome/terminology/3074b85b858455d8eeb76cfcdef685ced19bbe11/external/hgnc.genefamily-names.belns"
+DEFINE NAMESPACE GO             AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/go-names.belns"
+DEFINE NAMESPACE INTERPRO       AS URL "https://raw.githubusercontent.com/pharmacome/terminology/f2f993e599694ab5ce989cc39d789a499f75db99/external/interpro-names.belns"
+DEFINE NAMESPACE MESH           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/01c9daa61012b37dd0a1bc962521ba51a15b38f1/external/mesh-names.belns"
+DEFINE NAMESPACE MGI            AS URL "https://raw.githubusercontent.com/pharmacome/terminology/f2f993e599694ab5ce989cc39d789a499f75db99/external/mgi-names.belns"
+DEFINE NAMESPACE MIRBASE        AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/mirbase-names.belns"
+DEFINE NAMESPACE NCBIGENE       AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/entrez.belns"
+DEFINE NAMESPACE PFAM           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/8ccfed235e418e4c8aa576f9a5ef0f838e794c7f/external/pfam-names.belns"
+DEFINE NAMESPACE RGD            AS URL "https://raw.githubusercontent.com/pharmacome/terminology/f2f993e599694ab5ce989cc39d789a499f75db99/external/rgd-names.belns"
+
+# Namespaces hosted on https://github.com/sorgerlab/famplex
+# ---------------------------------------------------------
+DEFINE NAMESPACE FPLX           AS URL "https://raw.githubusercontent.com/sorgerlab/famplex/e8ae9926ff95266032cb74f77973c84939bffbeb/export/famplex.belns"
+
+# Namespaces hosted on https://arty.scai.fraunhofer.de/artifactory/bel/namespace
+# ------------------------------------------------------------------------------
+DEFINE NAMESPACE CTO            AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/clinical-trial-ontology/clinical-trial-ontology-1.0.0.belns"
+DEFINE NAMESPACE DO             AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/disease-ontology/disease-ontology-20170725.belns"
+DEFINE NAMESPACE HP             AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/hp/hp-20171108.belns"
+DEFINE NAMESPACE SCOMP          AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/selventa-named-complexes/selventa-named-complexes-20170725.belns"
+DEFINE NAMESPACE SFAM           AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/selventa-protein-families/selventa-protein-families-20170725.belns"
+
+# Namespaces defined with regular expressions
+# -------------------------------------------
+DEFINE NAMESPACE DBSNP          AS PATTERN "rs[0-9]+"
+DEFINE NAMESPACE TAXONOMY       AS PATTERN "^\d+$"
+DEFINE NAMESPACE UNIPROT        AS PATTERN "^([A-N,R-Z][0-9]([A-Z][A-Z, 0-9][A-Z, 0-9][0-9]){1,2})|([O,P,Q][0-9][A-Z, 0-9][A-Z, 0-9][A-Z, 0-9][0-9])(\.\d+)?$"
+DEFINE NAMESPACE PUBCHEM        AS PATTERN "^\d+$"
+
+DEFINE NAMESPACE HM        AS PATTERN ".*"
+
+
+
+###############
+# Annotations #
+###############
+
+# Annotations defined with regular expressions
+# --------------------------------------------
+DEFINE ANNOTATION Observation     AS PATTERN ".*"
+DEFINE ANNOTATION Species       AS PATTERN ".*"
+DEFINE ANNOTATION Solvent     AS PATTERN ".*"
+DEFINE ANNOTATION TimePoint     AS PATTERN ".*"
+DEFINE ANNOTATION Dose     AS PATTERN ".*"
+DEFINE ANNOTATION Injection     AS PATTERN ".*"
+DEFINE ANNOTATION Setting     AS PATTERN ".*"
+DEFINE ANNOTATION Evidence     AS PATTERN ".*"
+DEFINE ANNOTATION Baseline		AS PATTERN ".*"
+DEFINE ANNOTATION Change		AS PATTERN ".*"
+DEFINE ANNOTATION MonitoredTime 	AS PATTERN ".*"
+
+
+# Annotations hosted on https://arty.scai.fraunhofer.de/artifactory/bel/annotation
+# --------------------------------------------------------------------------------
+DEFINE ANNOTATION Anatomy       AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/anatomy/anatomy-20170511.belanno"
+DEFINE ANNOTATION CellLine      AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/cell-line/cell-line-20170511.belanno"
+DEFINE ANNOTATION CellStructure AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/cell-structure/cell-structure-20170511.belanno"
+DEFINE ANNOTATION Cell          AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/cell/cell-20170511.belanno"
+DEFINE ANNOTATION Confidence    AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/confidence/confidence-1.0.0.belanno"
+DEFINE ANNOTATION Disease       AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/disease/disease-20170511.belanno"
+DEFINE ANNOTATION Gender        AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/gender/gender-1.0.0.belanno"
+DEFINE ANNOTATION MeSHAnatomy   AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/mesh-anatomy/mesh-anatomy-20170511.belanno"
+DEFINE ANNOTATION MeSHDisease   AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/mesh-diseases/mesh-diseases-20170511.belanno"
+DEFINE ANNOTATION Subgraph      AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/neurommsig/neurommsig-1.0.3.belanno"
+DEFINE ANNOTATION TextLocation  AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/annotation/text-location/text-location-1.0.1.belanno"
+
+##############
+# Statements #
+##############
+
+
+#### Supplementary Table 4
+
+SET Citation = {"PubMed", "22243794"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "DMSO, diluted in PBS"
+SET TimePoint = "4 - 24 h after treatment"
+SET Dose = "50 mmol/kg"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+
+a(CHEBI:heme) increases p(HM:"activated protein C")
+p(HM:"activated protein C")	partOf	p(HGNC:PROC)
+
+UNSET Species
+UNSET Solvent
+UNSET TimePoint
+UNSET Dose
+UNSET Injection
+UNSET Setting
+
+
+SET Citation = {"PubMed", "32705892"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "30 mM NaOH, diluted in Tris-HCl buffer (pH 7.4)"
+SET Dose = "187.5 ‐ 3000 nM"
+SET Setting = "in vitro"
+SET Observation = "400nM(Binding affinity), 1:1.3 (geometry)"
+
+a(CHEBI:heme) increases complex(p(HM:"activated protein C"), a(CHEBI:heme))
+
+a(CHEBI:heme) partOf complex(p(HM:"activated protein C"), a(CHEBI:heme))
+p(HM:"activated protein C") partOf complex(p(HM:"activated protein C"), a(CHEBI:heme))
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "30 mM NaOH, diluted in HEPES buffer (pH 7.0)"
+SET Dose = "0 ‐ 50 μM"
+SET Setting = "in vitro"
+SET Observation = "Amidolytic activity, Ki:12.56 mM"
+
+a(CHEBI:heme) decreases p(HM:"activated protein C")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "30 mM NaOH, diluted in DPBS buffer (pH 7.4)"
+SET Dose = "0 ‐ 100 μM"
+SET Setting = "in vitro"
+
+p(HM:"activated protein C") decreases bp(GO:"coagulation")
+p(HM:"activated protein C") decreases bp(MESH:"Cytotoxicity, Immunologic")
+bp(HM:"anti-coagulation") decreases bp(GO:"coagulation")
+bp(MESH:"Cytotoxicity, Immunologic") increases bp(GO:"apoptotic process")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "30 mM NaOH, diluted in medium"
+SET Dose = "120 μM"
+SET Setting = "in vitro"
+SET Observation = "Cytotoxicity"
+
+p(HM:"activated protein C") decreases a(CHEBI:heme)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "22024794"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Observation = "Suggestion of a permanently bound heme"
+
+a(CHEBI:heme) partOf p(HM:"a2-antiplasmin")
+p(HM:"a2-antiplasmin") decreases bp(GO:"fibrinolysis")
+p(HM:"a2-antiplasmin") decreases a(CHEBI:Plasmin)
+
+UNSET Species
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "6821696"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "No change of plasma level"
+
+a(CHEBI:heme) cnc p(HGNC:SERPINC1, loc(MESH:"Plasma"))
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "3345341"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "physiological saline"
+SET Dose = "3 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+
+a(CHEBI:heme) cnc p(HGNC:SERPINC1)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Citation
+
+
+SET Citation = {"PubMed", "19276082"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Dose = "1 mM"
+SET Injection = "- (mouse aorta)"
+SET Setting = "ex vivo"
+SET Observation = "Endothelial cells"
+
+a(CHEBI:heme) increases sec(a(CHEBI:Collagen))
+
+a(CHEBI:Collagen) partOf a(MESH:"Cell Adhesion Molecules")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "29452096"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "100 μM"
+SET Injection = "HUVECs"
+SET Setting = "in vitro"
+SET Observation = "Endothelial cells"
+
+p(HGNC:SELE) partOf a(MESH:"Cell Adhesion Molecules")
+a(CHEBI:heme) increases surf(p(HGNC:SELE))
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "6821696"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Plasma level, activity"
+
+p(HGNC:F5) partOf bp(GO:"coagulation")
+a(CHEBI:heme) decreases p(HGNC:F5)
+p(HM:"activated protein C") decreases p(HGNC:F5)
+a(CHEBI:heme) increases p(HM:"FDP")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Plasma level, activity"
+
+p(HGNC:F8) partOf bp(GO:"coagulation")
+a(CHEBI:heme) decreases p(HGNC:F8)
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "6411843"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3 (24h), diluted with barbital buffer (pH 7.4)"
+SET Dose = "18 ‐ 70 μg/ml"
+SET Injection = "- (plasma)"
+SET Setting = "in vitro"
+SET Observation = "Plasma level, activity"
+
+a(CHEBI:heme) decreases p(HGNC:F8)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "3105105"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3"
+SET Dose = "e.g. 0.17 mg/ml"
+SET Setting = "in vitro"
+
+p(HGNC:F8) partOf complex(p(HGNC:F8),p(HGNC:VWF))
+p(HGNC:VWF) partOf complex(p(HGNC:F8),p(HGNC:VWF))
+
+a(CHEBI:heme) increases complex(p(HGNC:F8),p(HGNC:VWF))
+
+complex(p(HGNC:F8),p(HGNC:VWF)) partOf a(MESH:"Blood Platelets")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Citation
+
+
+SET Citation = {"PubMed", "22471307"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "DMSO, diluted in buffer"
+SET Dose = "0.01 ‐ 6.4 μM"
+SET Setting = "in vitro"
+SET Observation = "KD = 12.7nM"
+
+a(CHEBI:heme) partOf complex(p(HGNC:F8), a(CHEBI:heme))
+p(HGNC:F8) partOf complex(p(HGNC:F8), a(CHEBI:heme))
+
+UNSET Observation
+SET Observation = "KD = 1.9nM"
+
+p(HGNC:F8A1) partOf p(HGNC:F8)
+a(CHEBI:heme) partOf complex(p(HGNC:F8A1), a(CHEBI:heme))
+p(HGNC:F8A1) partOf complex(a(CHEBI:heme), p(HGNC:F8A1))
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "DMSO, diluted in buffer"
+SET Dose = "Molar excess"
+SET Setting = "in vitro"
+SET Observation = "activity"
+
+p(HGNC:VWF) decreases a(CHEBI:heme)
+a(CHEBI:heme) decreases p(HGNC:F8A1)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "DMSO, diluted in buffer"
+SET Dose = "Molar excess"
+SET Setting = "in vitro"
+
+p(HGNC:F2) decreases complex(p(HGNC:F8),a(CHEBI:heme))
+p(HGNC:F2) partOf bp(GO:"coagulation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "DMSO, diluted in buffer"
+SET Dose = "Molar excess"
+SET Setting = "in vitro"
+
+p(HGNC:F8) partOf complex(p(HGNC:F8),p(HGNC:F9))
+p(HGNC:F9) partOf complex(p(HGNC:F8),p(HGNC:F9))
+
+a(CHEBI:heme) decreases complex(p(HGNC:F8),p(HGNC:F9))
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Citation
+
+
+SET Citation = {"PubMed", "4031058"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.1 N NaOH, diluted in PBS"
+SET Dose = "3 ‐ 24 nmol"
+SET Injection = "‐ (plasma)"
+SET Setting = "in vitro"
+SET Observation = "Increased activation (amidolytic and autoactivation) suggested"
+
+a(CHEBI:heme) increases p(HGNC:F12)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "32705892"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "30 mM NaOH, diluted in Tris buffer (pH 7.5)"
+SET Dose = "0 ‐ 50 μM"
+SET Setting = "in vitro"
+SET Observation = "No impact on the amidolytic activity of rFXIIIa (400 nM)"
+
+# a(CHEBI:heme) cnc p(HGNC:F13A1)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "6821696"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Plasma level, activity"
+
+a(CHEBI:heme) cnc p(HGNC:F8A1)
+p(HGNC:F8A1) partOf bp(GO:"coagulation")
+a(HM:"Fibrin") partOf bp(GO:"coagulation")
+
+a(HM:"Fibrin")	partOf	p(HM:"FDP")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "6821696"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Plasma level"
+
+a(MESH:Fibrinogen) partOf bp(GO:"coagulation")
+a(MESH:Fibrinogen) partOf a(HM:"Fibrin")
+a(CHEBI:heme) decreases a(MESH:Fibrinogen)
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "6411843"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9913"
+SET Solvent = "0.25% Na2CO3 (24h), diluted with barbital buffer (pH 7.4)"
+SET Dose = "50 μg/ml"
+SET Setting = "in vitro"
+SET Observation = "Clottablity"
+
+a(CHEBI:heme) partOf complex(a(MESH:Fibrinogen), a(CHEBI:heme))
+a(MESH:Fibrinogen) partOf complex(a(MESH:Fibrinogen), a(CHEBI:heme))
+a(MESH:Fibrinogen) increases bp(GO:"coagulation")
+a(CHEBI:heme) decreases a(MESH:Fibrinogen)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+SET Citation = {"PubMed", "6383458"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3 (pH 7.4), diluted with isotonic salin"
+SET Dose = "7 μg/m"
+SET Injection = "-(gel‐filtered platelets)"
+SET Setting = "in vitro"
+SET Observation = "Hematin‐induced fibrinogen binding to platelets ↑ (~13.8%; 30 min preincubation)"
+
+a(CHEBI:heme) increases a(HM:"Platelet bound fibrinogen")
+a(MESH:"Blood Platelets") partOf a(HM:"Platelet bound fibrinogen")
+a(MESH:Fibrinogen) partOf a(HM:"Platelet bound fibrinogen")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "21451399"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Setting = "in vitro"
+SET Observation = "Suggestion of at least one permanently bound heme"
+
+a(CHEBI:heme) partOf a(MESH:Fibrinogen)
+
+UNSET Species
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "23864430"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.1 M NaOH, diluted with T"
+SET Dose = "10 μM"
+SET Setting = "in vitro"
+SET Observation = "Binding of hemin to immobilized fibrinogen"
+
+a(CHEBI:heme) partOf complex(a(MESH:Fibrinogen), a(CHEBI:heme))
+a(MESH:Fibrinogen) partOf complex(a(MESH:Fibrinogen), a(CHEBI:heme))
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "27229173"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9823"
+SET Solvent = "0.05 M NaOH"
+SET Dose = "0 ‐ 500 μM"
+SET Injection = "‐ (blood plasma)"
+SET Setting = "in vitro"
+
+a(MESH:Fibrinogen) partOf bp(HM:"fibrinogen cross-linking")
+a(CHEBI:heme) increases bp(HM:"fibrinogen cross-linking")
+bp(HM:"fibrinogen cross-linking") increases bp(HM:"fibrinogen polymerization")
+a(MESH:Fibrinogen) partOf bp(HM:"fibrinogen polymerization")
+a(CHEBI:heme)  increases bp(HM:"fibrinogen polymerization")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.05 M NaOH"
+SET Dose = "30 μM"
+SET Setting = "in vitro"
+
+a(MESH:Fibrinogen) partOf bp(HM:"fibrinogen cross-linking")
+a(CHEBI:heme) increases bp(HM:"fibrinogen cross-linking")
+bp(HM:"fibrinogen cross-linking") increases bp(HM:"fibrinogen polymerization")
+a(MESH:Fibrinogen) partOf bp(HM:"fibrinogen polymerization")
+a(CHEBI:heme)  increases bp(HM:"fibrinogen polymerization")
+
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.05 M NaOH"
+SET Dose = "20 μM"
+SET Setting = "in vitro"
+
+a(CHEBI:"hydrogen peroxide") partOf a(MESH:"Reactive Oxygen Species")
+a(CHEBI:"hydrogen peroxide") increases bp(HM:"fibrinogen polymerization")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Citation
+
+
+SET Citation = {"PubMed", "29322134"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "DMSO"
+SET Dose = "25 ‐ 50 μM"
+SET Setting = "in vitro"
+SET Observation = "KD = 3.3 µM"
+
+a(CHEBI:heme) increases bp(HM:"fibrinogen cross-linking")
+a(MESH:Fibrinogen) partOf complex(a(CHEBI:heme), a(MESH:Fibrinogen))
+a(CHEBI:heme) partOf complex(a(CHEBI:heme), a(MESH:Fibrinogen))
+a(MESH:Fibrinogen) partOf bp(HM:"fibrinogen cross-linking")
+
+UNSET Observation
+SET Observation = "Peroxidase-like activity"
+# complex(a(CHEBI:heme), a(MESH:Fibrinogen)) increases a(MESH:"Reactive Oxygen Species")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "7403664"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "N/A"
+SET Dose = "N/A"
+SET Setting = "in vitro"
+SET Observation = "No binding to fibrin"
+
+a(HM:"Fibrin") partOf complex(a(HM:"Fibrin"), a(CHEBI:hematoporphyrin))
+a(CHEBI:hematoporphyrin)	partOf	complex(a(HM:"Fibrin"), a(CHEBI:hematoporphyrin))
+a(CHEBI:hematoporphyrin) decreases complex(a(CHEBI:hematoporphyrin), a(HM:"Fibrin"))
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "29452096"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "N/A"
+SET Dose = "50 ‐ 100 μM"
+SET Injection = "‐ (HUVECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial cells"
+
+p(HGNC:ICAM1) partOf a(MESH:"Cell Adhesion Molecules")
+a(CHEBI:heme) increases p(HGNC:ICAM1)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "11535514"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "0.1 N NaOH, 10 mM Tris base (pH 8.6)"
+SET Dose = "750 μM"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Endothelial cells"
+
+a(CHEBI:heme) increases p(HGNC:ICAM1)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "4031058"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.1 N NaOH, diluted in PBS"
+SET Dose = "3 ‐ 24 nmol"
+SET Injection = "‐ (plasma)"
+SET Setting = "in vitro"
+SET Observation = "Amidolytic activity)"
+
+a(CHEBI:heme) increases p(HGNC:KLKB1)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "6411843"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9823"
+SET Solvent = "0.25% Na2CO3 (24h), diluted with barbital buffer (pH 7.4)"
+SET Dose = "0.006 ‐ 0.09 μg/ml"
+SET Setting = "in vitro"
+SET Observation = "Amidolytic activity"
+
+a(CHEBI:heme) decreases a(CHEBI:Plasmin)
+a(CHEBI:Plasmin) increases bp(GO:"fibrinolysis")
+a(CHEBI:heme) decreases bp(GO:"fibrinolysis")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+
+
+SET Citation = {"PubMed", "22024794"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Setting = "in vitro"
+
+a(CHEBI:heme) partOf a(CHEBI:Plasmin)
+
+UNSET Species
+UNSET Setting
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "6821696"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+
+a(CHEBI:heme) cnc p(HGNC:PLG)
+a(CHEBI:Plasmin) partOf p(HGNC:PLG)
+p(HGNC:PLG) partOf a(CHEBI:Plasmin)
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "22243794"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "DMSO, diluted in PBS"
+SET Dose = "50 μmol/kg"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+SET Observation = "Plasma level"
+
+a(CHEBI:heme) increases p(HGNC:PROC)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "23692858"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "50 mM NaOH / 145 mM NaCl, diluted in medium"
+SET Dose = "100 μM"
+SET Injection = "‐ (HUVECs)"
+SET Setting = "in vitro"
+SET Observation = "Cell Membrane"
+
+a(CHEBI:heme) increases p(HGNC:SELP)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "24277079"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "D‐sorbitol, Na2CO3, saline (as Panhematin ®)"
+SET Dose = "20 μM"
+SET Injection = "‐ (HUVECs)"
+SET Setting = "in vitro"
+
+a(CHEBI:heme) increases p(HGNC:TLR4)
+p(HGNC:TLR4) increases p(HGNC:SELP)
+a(CHEBI:heme) increases p(HGNC:SELP)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "D‐sorbitol, Na2CO3, saline (as Panhematin ®)"
+SET Dose = "3.2 μmol/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+
+a(CHEBI:heme) increases p(HGNC:SELP)
+a(CHEBI:heme) increases p(HGNC:TLR4)
+a(CHEBI:heme) increases a(HM:"NOX")
+a(HM:"NOX") increases p(HGNC:SELP)
+p(MESH:"Protein Kinase C") increases p(HGNC:SELP)
+a(CHEBI:heme) increases a(MESH:"Reactive Oxygen Species")
+a(MESH:"Reactive Oxygen Species") increases p(HGNC:SELP)
+a(HM:"NOX") increases a(MESH:"Reactive Oxygen Species")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Citation
+
+
+SET Citation = {"PubMed", "11535514"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "0.1 N NaOH, 10 mM Tris base (pH 8.6)"
+SET Dose = "750 μM"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Endothelial cells"
+
+a(CHEBI:heme) increases p(HGNC:SELP)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "6821696"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "70 μg/ml"
+SET Injection = "‐ (plasma)"
+SET Setting = "in vitro"
+SET Observation = "Time‐ and temperature-dependent prolongation of TT"
+
+a(CHEBI:heme) increases act(p(HGNC:F2), ma(HM:"Time and temperature dependency"))
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "6411843"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9913"
+SET Solvent = "0.25% Na2CO3 (24h), diluted with barbital buffer (pH 7.4)"
+SET Dose = "50 μg/ml"
+SET Setting = "in vitro"
+
+a(CHEBI:heme) partOf complex(p(HGNC:F2), a(CHEBI:heme))
+p(HGNC:F2) partOf complex(p(HGNC:F2), a(CHEBI:heme))
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+
+
+SET Citation = {"PubMed", "6411843"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3 (24h), diluted with barbital buffer (pH 7.4)"
+SET Dose = "0 ‐ 0.238 μg/ml"
+SET Setting = "in vitro"
+SET Observation = "Amidolytic activity"
+
+a(CHEBI:heme) decreases p(HGNC:F2)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "25596265"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "0.1 M NaOH and 0.1 M Tris‐HCl (pH 8.0)"
+SET Dose = "0 ‐ 35 μmol/kg"
+SET Injection = "Retro‐orbital"
+SET Setting = "in vivo"
+SET Observation = "Plasma level"
+
+a(CHEBI:heme) increases complex(p(HGNC:SERPINC1), p(HGNC:F2))
+p(HGNC:SERPINC1) partOf complex(p(HGNC:SERPINC1), p(HGNC:F2))
+p(HGNC:F2) partOf complex(p(HGNC:SERPINC1), p(HGNC:F2))
+
+a(CHEBI:heme) cnc p(HGNC:F12)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "32705892"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "30 mM NaOH, diluted in HEPES buffer (pH 7.0)"
+SET Dose = "0 ‐ 50 μM"
+SET Setting = "in vitro"
+
+a(CHEBI:heme) cnc p(HGNC:F2)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "22243794"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "DMSO, diluted in PBS"
+SET Dose = "50 μmol/kg"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+SET Observation = "Plasma level"
+
+a(CHEBI:heme) decreases p(HGNC:THBD)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "18983524"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = " 0.05 M NaOH, diluted in medium"
+SET Dose = "1 ‐ 100 μM"
+SET Injection = "‐ (ECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial cells"
+
+a(CHEBI:heme) increases p(HGNC:F3)
+p(HGNC:F3) partOf bp(GO:"coagulation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.05 M NaOH, diluted in medium"
+SET Dose = "100 μM"
+SET Injection = "‐ (ECs)"
+SET Setting = "in vitro"
+SET Observation = "Time‐dependent upregulation of TF mRNA expression ↑ (17-fold), timedependent upregulation of total endothelial TF protein level (after 4 hours; functionally active TF) ↑"
+
+a(CHEBI:heme) increases act(p(HGNC:F3), ma(tscript))
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"DOI", "10.1182/blood.v122.21.2215.221"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "10 μM"
+SET Injection = "-(plasma)"
+SET Setting = "in vitro"
+SET Observation = "Mononuclear cells and monocytes"
+
+a(CHEBI:heme) increases p(HGNC:F3)
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"DOI", "10.1182/blood.V124.21.455.455"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "30 μM"
+SET Injection = "-(plasma)"
+SET Setting = "in vitro"
+SET Observation = "Mononuclear cells"
+
+a(CHEBI:heme) increases p(HGNC:F3)
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "25596265"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.1 M NaOH and 0.1 M Tris‐HCl (pH 8.0)"
+SET Dose = "5‐ 50 μM"
+SET Setting = "in vitro"
+SET Observation = "Mononuclear cells"
+
+a(CHEBI:heme) increases p(HGNC:F3)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+
+
+SET Citation = {"PubMed", "28437457"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.1 M NaOH, adjusted to pH 7.4"
+SET Dose = "30 μM"
+SET Injection = "-(whole blood)"
+SET Setting = "ex vivo"
+
+p(HGNC:F3) increases bp(GO:"coagulation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Citation
+
+
+
+SET Citation = {"DOI", "10.1101/2020.10.09.20210336"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.1 M NaOH, diluted with water"
+SET Dose = "5 ‐ 30 μM"
+SET Injection = "-(PBMCs)"
+SET Setting = "in vitrto"
+SET Observation = "Mononuclear cells"
+
+p(HGNC:F3) increases bp(GO:"coagulation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+SET Citation = {"PubMed", "33314778"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "50 mM NaOH, 145 mM NaCl"
+SET Dose = "100 μmol/kg"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+
+p(HGNC:F3) increases bp(GO:"coagulation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Citation
+
+
+SET Citation = {"PubMed", "29452096"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "100 μM"
+SET Injection = "-(HUVECS)"
+SET Setting = "in vitro"
+
+a(CHEBI:heme) increases p(HGNC:VCAM1)
+p(HGNC:VCAM1) partOf a(MESH:"Cell Adhesion Molecules")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "11535514"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "0.1 N NaOH, 10 mM Tris base (pH 8.6)"
+SET Dose = "750 μM"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Endothelial cells"
+
+a(CHEBI:heme) increases p(HGNC:VCAM1)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "3105105"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3"
+SET Dose = "0.17 mg/ml"
+SET Setting = "in vitro"
+
+a(CHEBI:heme) increases complex(p(HGNC:VWF), p(HGNC:F8))
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "24277079"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Dose = "10 μM"
+SET Injection = "‐ (HUVECs)"
+SET Setting = "in vitro"
+
+a(MESH:"Weibel-Palade Bodies") increases p(HGNC:VWF)
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "23692858"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "50 mM NaOH / 145 mM NaCl, diluted in medium"
+SET Dose = "100 μM"
+SET Injection = "-(HUVECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial cells"
+
+a(MESH:"Weibel-Palade Bodies") increases p(HGNC:VWF)
+a(CHEBI:heme) increases a(MESH:"Weibel-Palade Bodies")
+
+UNSET Observation
+
+SET Observation = "Secretion"
+
+a(CHEBI:heme)increases p(HGNC:VWF)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "24277079"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "9606"
+SET Solvent = "D‐sorbitol, Na2CO3, saline"
+SET Dose = "20 μM"
+SET Injection = "- (HUVECs)"
+SET Setting = "in vitro"
+
+
+p(HGNC:VWF) partOf bp(HM:"VWF string formation")
+a(CHEBI:heme) increases bp(HM:"VWF string formation")
+a(MESH:"Hemopexin") decreases a(CHEBI:heme)
+a(CHEBI:heme) increases p(HGNC:VWF)
+p(HGNC:VWF) increases a(HM:"NOX")
+a(HM:"NOX") increases p(HGNC:VWF)
+a(CHEBI:heme) increases p(HGNC:VWF)
+a(CHEBI:heme) increases a(MESH:"Reactive Oxygen Species")
+a(MESH:"Reactive Oxygen Species") increases p(HGNC:VWF)
+a(CHEBI:heme) increases p(HGNC:TLR4)
+p(HGNC:TLR4) increases p(HGNC:VWF)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+
+
+SET Evidence = "From Supplementary Table 4"
+
+SET Species = "10090"
+SET Solvent = "D‐sorbitol, Na2CO3, saline"
+SET Dose = "3.2 μmol/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+
+p(HGNC:VWF) partOf bp(HM:"VWF string formation")
+a(CHEBI:heme) increases bp(HM:"VWF string formation")
+a(MESH:"Hemopexin") decreases a(CHEBI:heme)
+a(CHEBI:heme) increases p(HGNC:VWF)
+p(HGNC:VWF) increases a(HM:"NOX")
+a(HM:"NOX") increases p(HGNC:VWF)
+a(CHEBI:heme) increases p(HGNC:VWF)
+a(CHEBI:heme) increases a(MESH:"Reactive Oxygen Species")
+a(HM:"NOX") increases p(HGNC:VWF)
+a(CHEBI:heme) increases p(HGNC:TLR4)
+p(HGNC:TLR4) increases p(HGNC:VWF)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Citation
+
+SET Citation = {"DOI", "10.1111/j.1749-6632.1986.tb34606.x"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Observation =  "Activity"
+a(CHEBI:heme) decreases p(HGNC:F2)
+UNSET Observation
+
+p(HGNC:F2) increases a(PUBCHEM:25078015 ! "Fibrinopeptide A")
+a(CHEBI:heme) decreases a(PUBCHEM:25078015 ! "Fibrinopeptide A")
+a(PUBCHEM:25078015 ! "Fibrinopeptide A") partOf p(HM:"FDP")
+
+UNSET Citation
+
+SET Citation = {"PubMed", "32354867"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Observation = "KD= 915 nM, platelet"
+a(CHEBI:heme) partOf complex(p(HGNC:CLEC1B),a(CHEBI:heme))
+UNSET Observation
+
+SET Observation = "Platelet"
+p(HGNC:CLEC1B) partOf complex(p(HGNC:CLEC1B),a(CHEBI:heme))
+UNSET Citation
+
+
+SET Citation = {"PubMed", "33843987"}
+SET Evidence = "From Supplementary Table 4"
+
+SET Observation = "KD= 29.4 µM, platelet"
+a(CHEBI:heme) partOf complex(p(HGNC:GP6),a(CHEBI:heme))
+UNSET Observation
+
+SET Observation = "Platelet"
+p(HGNC:GP6) partOf complex(p(HGNC:GP6),a(CHEBI:heme))
+p(HGNC:GP6) increases bp(GO:"platelet activation")
+complex(a(CHEBI:heme), p(HGNC:GP6)) increases bp(GO:"platelet aggregation")
+UNSET Citation
+
+SET Citation = {"PubMed", "15242554"}
+SET Evidence = "From Supplementary Table 4"
+
+path(MESH:Thrombosis) partOf a(MESH:"Blood Platelets")
+a(MESH:"Blood Platelets")	partOf	path(MESH:Thrombosis)
+UNSET Citation
+
+SET Citation = {"PubMed", "6313299"}
+SET Evidence = "From Supplementary Table 4"
+SET Setting = "in vitro"
+
+a(MESH:"Blood Platelets") increases a(HM:"platelet membrane")
+a(MESH:"Blood Platelets") increases a(HM:"platelet granula")
+
+a(HM:"platelet membrane") partOf a(MESH:"Blood Platelets")
+a(HM:"platelet granula") partOf a(MESH:"Blood Platelets")
+
+UNSET Setting
+UNSET Citation
+
+
+#### Supplementary Table 1
+SET Citation = {"PubMed", "19867501"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9986"
+SET Solvent = "0.85% salt solution"
+SET Dose = "30 ‐ 54 mg/kg"
+SET Injection = "intraperitoneal, subcutaneous, intravenous"
+SET Observation = "Ecchymosis, hemorrhage"
+
+a(CHEBI:heme) increases path(MESH:Ecchymosis)
+UNSET Species
+
+SET Species = "10141"
+a(CHEBI:heme) increases path(MESH:Ecchymosis)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "19867680"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9615"
+SET Solvent = "0.85% NaCl + 2% Na2CO3 alkaline solution"
+SET Dose = "3.5 ‐ 9 mg/kg"
+SET Injection = "intraperitoneal, visceral"
+SET Observation = "Hemorrhage"
+
+a(CHEBI:heme) increases path(MESH:Hemorrhage)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "19867688"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9986"
+SET Solvent = "0.85% NaCl + 2% Na2CO3 alkaline solution"
+SET Dose = "25 mg/kg"
+SET Injection = "intravenous"
+
+a(CHEBI:heme) increases path(MESH:Hemorrhage)
+a(CHEBI:heme) increases path(MESH:Anemia)
+path(MESH:Hemorrhage) increases path(MESH:"Acute Kidney Injury")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Citation
+
+
+
+SET Citation = {"DOI", "10.1001/archinte.1913.00070030072007"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9986"
+SET Solvent = "0.85% NaCl + 2% Na2CO3 alkaline solution"
+SET Dose = "10 ‐ 25 mg/kg"
+SET Injection = "intravenous"
+SET Observation = "Hemorrhage, hyaline thrombi, emboli, vasoocclusion, vascular injury, infarcts"
+
+a(CHEBI:heme) increases path(MESH:Hemorrhage)
+a(CHEBI:heme) increases path(MESH:Thrombosis)
+a(CHEBI:heme) increases path(MESH:Embolism)
+a(CHEBI:heme) increases path(MESH:Infarction)
+path(MESH:Thrombosis) increases path(MESH:Embolism)
+path(MESH:Thrombosis) increases path(MESH:Infarction)
+bp(GO:"coagulation") increases path(MESH:Thrombosis)
+bp(GO:"coagulation") increases path(HM:"vaso occlusion")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"DOI", "10.1007/s12325-008-0094-y"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9615"
+SET Solvent = "disodium buffer, pH 7.6"
+SET Dose = "N/A (intravenous), 200 mg (intraperitoneal, 3 x weekly), 20 mg (subcutaneous, 5 x in a period of 1‐2 weeks)"
+SET Injection = "intravenous, intraperitoneal, subcutaneous"
+SET Observation = "Hemorrhages, thromboses, infarctions"
+
+a(CHEBI:heme) increases path(MESH:Hemorrhage)
+a(CHEBI:heme) increases path(MESH:Thrombosis)
+a(CHEBI:heme) increases path(MESH:Infarction)
+
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "21010490"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9615"
+SET Solvent = "physiological saline, sodium salt solution"
+SET Dose = "14.5 ‐ 32.6 mg/kg"
+SET Injection = "intravenous"
+SET Observation = "Inhibition of clotting mechanism"
+
+a(CHEBI:heme) decreases bp(GO:"coagulation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "6011129"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "10114"
+SET Solvent = "isotonic Na2CO3 solution"
+SET Dose = "100 ‐ 180 mg/kg"
+SET Injection = "intravenous"
+SET Observation = "Massive hemorrhagic bleeding, bleeding out of every body orifice"
+
+a(CHEBI:heme) increases path(MESH:Hemorrhage)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "1147435"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3, pH 8.0; diluted in physiologic saline"
+SET Dose = "1.2 ‐ 6 mg/kg (applied as 4.3 ‐ 108 mg/l, daily)"
+SET Injection = "intravenous"
+SET Observation = "Thrombophlebitis"
+
+a(CHEBI:heme) increases path(MESH:Thrombophlebitis)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"DOI", "10.1016/0378-4274(78)90034-6"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "10114"
+SET Solvent = "1% Na2CO3"
+SET Dose = "40 ‐ 60 mg/kg"
+SET Injection = "intravenous"
+
+a(CHEBI:heme) increases path(HM:Bleeding)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "449661"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Solvent = "saline solution"
+SET Dose = "1.8 ‐ 3.7 mg/kg (applied as 2 mg/ml, daily)"
+SET Injection = "intravenous"
+SET Observation = "Chemical phlebitis"
+
+a(CHEBI:heme) increases path(MESH:Phlebitis)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "7305149"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Dose = "196 mg, every 12 hours"
+SET Injection = "intravenous"
+SET Observation = "Thrombophlebitis"
+
+a(CHEBI:heme) increases path(MESH:Thrombophlebitis)
+
+UNSET Species
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "7302116"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Solvent = "1% Na2CO3"
+SET Dose = "4 mg/kg (every 12 hours or daily)"
+SET Injection = "intravenous"
+SET Observation = "Phlebitis"
+
+a(CHEBI:heme) increases path(MESH:Phlebitis)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "7141394"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3, pH 8.0; diluted in physiologic saline"
+SET Dose = "3 ‐ 4 mg/kg"
+SET Injection = "intravenous"
+SET Observation = "Bile thrombi"
+
+a(CHEBI:heme) increases path(MESH:Thrombosis)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "2891815"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9986"
+SET Solvent = "aqueous solution with 40% 1,2‐propanediol and 10% ethanol"
+SET Dose = "5 mg/kg (applied as 25 mg/ml, repetitive)"
+SET Injection = "intravenous"
+SET Observation = "Thrombophlebitis"
+
+a(CHEBI:heme) increases path(MESH:Thrombophlebitis)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "3177402"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Solvent = "0.05 M Na2CO3, 0.04 M sorbitol"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Observation = "Thrombophlebitis, fibrotic events, vaso‐occlusion"
+
+a(CHEBI:heme) increases path(MESH:Thrombophlebitis)
+a(CHEBI:heme) increases path(HM:"vaso occlusion")
+path(HM:"vaso occlusion") increases path(MESH:Thrombosis)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"URL", "https://web.archive.org/web/20210227165139/https://einstein.pure.elsevier.com/en/publications/hematin-induced-coagulopathy-in-acute-intermittent-porphyria-a-ca"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Solvent = "0.05 M Na2CO3, 0.04 M sorbitol"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Observation = "Coagulopathy, hematoma"
+
+a(CHEBI:heme) increases path(MESH:"Blood Coagulation Disorders")
+a(CHEBI:heme) increases path(MESH:Hematoma)
+
+path(MESH:Thrombosis) partOf path(MESH:"Blood Coagulation Disorders")
+path(MESH:Thrombosis)	partOf	path(MESH:Thrombophlebitis)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "16945618"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Solvent = "0.05 M Na2CO3, 0.04 M sorbitol"
+SET Dose = "< 2 ‐ > 6 mg/kg"
+SET Injection = "intravenous"
+SET Observation = "Thrombotic complications"
+
+a(CHEBI:heme) increases path(MESH:"Thrombosis")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "25762493"}
+SET Evidence = "From Supplementary Table 1"
+
+SET Species = "9606"
+SET Dose = "3 mg/kg (applied as 25 mg/ml, repetitive)"
+SET Injection = "intravenous"
+SET Observation = "Thrombosis"
+
+# Heme arginate (Normosang®)
+a(CHEBI:heme) increases path(MESH:"Thrombosis")
+
+UNSET Species
+UNSET Dose
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+#### Supplementary Table 3
+
+SET Citation = {"PubMed", "19867688"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9986"
+SET Solvent = "0.85% NaCl + 2% Na2CO3 alkaline solution"
+SET Dose = "25 mg/k"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Platelet count"
+
+a(CHEBI:heme) decreases a(MESH:"Blood Platelets")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "7305149"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "196 mg, every 12 hours"
+SET Injection = "intravenous"
+SET Setting = "Case report"
+SET Observation = "Platelet count"
+
+a(CHEBI:heme) decreases a(MESH:"Blood Platelets")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "6274020"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Solvent = "25% pyridine (pH 12.6), diluted with 30% pyridine (pH 12.2)"
+SET Dose = "0.15 ‐ 770 mM"
+SET Setting = "in vitro"
+SET Observation = "epinephrine dependent"
+
+a(CHEBI:heme) increases bp(GO:"platelet activation")
+
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "6313299"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Setting = "in vitro"
+SET Observation = "ADP & epinephrine dependent"
+
+a(CHEBI:heme) increases bp(GO:"platelet aggregation")
+a(CHEBI:heme) partOf a(HM:"platelet granula")
+
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "6821696"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "4 mg/kg, every 12 hours"
+SET Injection = "intravenous"
+SET Setting = "Case report"
+SET Observation = "Platelet count"
+
+a(CHEBI:heme) decreases a(MESH:"Blood Platelets")
+a(CHEBI:heme) increases path(MESH:"Thrombocytopenia")
+path(MESH:Thrombocytopenia) decreases a(MESH:"Blood Platelets")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Platelet count"
+
+a(CHEBI:heme) decreases a(MESH:"Blood Platelets")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "0.1 mg/ml (≙ 158 μM)"
+SET Injection = "-(platelet.rich plasma sample)"
+SET Setting = "in vitro"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) increases bp(GO:"platelet aggregation")
+a(CHEBI:heme) increases a(CHEBI:serotonin))
+a(CHEBI:heme) increases a(CHEBI:ATP))
+a(HM:"platelet granula") increases a(CHEBI:serotonin)
+a(HM:"platelet granula") increases a(CHEBI:ATP)
+a(CHEBI:ATP) increases bp(GO:"platelet activation")
+a(HM:"platelet granula") increases a(CHEBI:ADP)
+a(CHEBI:ADP) increases bp(GO:"platelet aggregation")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "6383458"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3 (pH 7.4), diluted with isotonic saline"
+SET Dose = "2 ‐ 5 μg/ml (≙ 3.2 - 7.9 μM)"
+SET Injection = "‐ (washed platelets)"
+SET Setting = "in vitro"
+SET Observation = "Platelet aggregation ↑"
+
+a(CHEBI:heme) increases bp(GO:"platelet aggregation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3 (pH 7.4), diluted with isotonic saline"
+SET Dose = "5 ‐ 10 μg/ml (≙ 7.9 ‐ 15.8 μM)"
+SET Injection = "- (washed platelets)"
+SET Setting = "in vitro"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) increases a(PUBCHEM:5280497 ! "Thromboxane A2")
+a(PUBCHEM:5280497 ! "Thromboxane A2") increases bp(GO:"platelet aggregation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "0.25% Na2CO3 (pH 7.4), diluted with isotonic saline"
+SET Dose = "2 μg/ml (≙ 3.2 μM)"
+SET Injection = "‐ (washed platelets)"
+SET Setting = "in vitro"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) decreases a(CHEBI:ATP)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "2405084"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "0.05 M Na2CO3, 0.04 M sorbitol"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "Case report"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) increases a(MESH:"Blood Platelets")
+a(CHEBI:heme) decreases bp(GO:"platelet aggregation")
+a(CHEBI:heme) decreases a(CHEBI:ATP, loc(MESH:"Blood Platelets"))
+a(CHEBI:heme) decreases a(CHEBI:ADP, loc(MESH:"Blood Platelets"))
+
+a(MESH:"Blood Platelets")	partOf	bp(GO:"platelet aggregation")
+a(CHEBI:ADP) partOf a(CHEBI:ATP)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"URL", "https://web.archive.org/web/20210227165139/https://einstein.pure.elsevier.com/en/publications/hematin-induced-coagulopathy-in-acute-intermittent-porphyria-a-ca"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "0.05 M Na2CO3, 0.04 M sorbitol"
+SET Dose = "4 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "Case report"
+SET Observation = "Platelet count"
+
+a(CHEBI:heme) decreases a(MESH:"Blood Platelets")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "15242554"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Solvent = "Phosphate buffered saline"
+SET Dose = "15 ‐ 40 mg/kg, twice daily"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) increases path(MESH:Thrombosis)
+a(CHEBI:heme) increases a(PUBCHEM:135398570 ! "Cyclic guanosine monophosphate")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "17849050"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10114"
+SET Solvent = "< 0.5% DMSO"
+SET Dose = "50 mg/kg"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+SET Observation = "Platelet count"
+
+a(CHEBI:heme) increases a(MESH:"Blood Platelets")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+
+SET Citation = {"PubMed", "19276082"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Dose = "1 mM"
+SET Injection = "‐ (mouse aorta)"
+SET Setting = "ex vivo"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) increases bp(HM:"endothelial denudation")
+bp(HM:"endothelial denudation") increases bp(GO:"platelet aggregation")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "29869870"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "0 ‐ 25 μM"
+SET Injection = "- (platelets)"
+SET Setting = "in vitro"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) increases bp(GO:ferroptosis)
+a(CHEBI:heme) increases bp(GO:"platelet activation")
+a(CHEBI:heme) increases p(HGNC:SELP)
+a(CHEBI:heme) increases p(MESH:"Actins")
+a(CHEBI:heme) increases bp(MESH:"Lipid Peroxidation")
+a(CHEBI:heme) increases bp(MESH:"Cell Survival")
+a(CHEBI:heme) increases a(MESH:"L-Lactate Dehydrogenase")
+a(CHEBI:heme) increases p(MESH:"HMOX1 protein, human")
+a(CHEBI:heme) increases p(HGNC:GGT1)
+p(HGNC:GGT1) decreases a(HM:"GSH")
+a(CHEBI:heme) decreases a(HM:"GSH/GSSG ratio")
+p(MESH:"HMOX1 protein, human") decreases a(CHEBI:heme)
+a(MESH:"Reactive Oxygen Species") increases bp(MESH:"Lipid Peroxidation")
+bp(MESH:"Lipid Peroxidation") increases bp(HM:"endothelial denudation")
+a(MESH:"Blood Platelets")	partOf	bp(GO:"platelet activation")
+bp(HM:oxidation) increases bp(MESH:"Lipid Peroxidation")
+
+UNSET Observation
+SET Observation = "Platelet"
+a(CHEBI:heme) increases a(HM:"GSSH")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "31102787"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "0‐25 μM"
+SET Injection = "‐ (platelets)"
+SET Setting = "in vitro"
+SET Observation = "Platelet"
+
+
+a(CHEBI:heme) increases bp(GO:"platelet activation")
+a(CHEBI:heme) decreases bp(MESH:"Cell Survival")
+a(CHEBI:heme) increases p(HGNC:SELP)
+a(CHEBI:heme) increases a(MESH:"L-Lactate Dehydrogenase")
+a(CHEBI:heme) decreases act(p(HGNC:BCL2), ma(GO:"negative regulation of apoptotic process"))
+a(CHEBI:heme) decreases a(HM:"GSH/GSSG ratio")
+a(CHEBI:heme) increases p(HGNC:NLRP3)
+a(CHEBI:melatonin) decreases bp(GO:"platelet activation")
+a(CHEBI:heme) increases p(HGNC:SELP)
+a(CHEBI:melatonin) decreases p(HGNC:SELP)
+a(MESH:"Reactive Oxygen Species") increases p(HGNC:NLRP3)
+# a(CHEBI:heme) increases bp(GO:ferroptosis)
+# a(CHEBI:heme) increases p(MESH:"HMOX1 protein, human")
+# a(CHEBI:heme) increases p(HGNC:GGT1)
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Dose = "50 μmol/kg"
+SET Setting = "in vivo"
+SET Observation = "Platelet number ↓, soluble P‐selectin level ↑, prevention by melatonin"
+
+a(CHEBI:heme) decreases a(MESH:"Blood Platelets")
+a(CHEBI:heme) increases p(HGNC:SELP)
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "32354867"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "0.75 ‐ 50 μM"
+SET Injection = "‐ (platelets)"
+SET Setting = "in vitro"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) increases bp(GO:"platelet aggregation")
+a(CHEBI:heme) increases p(HGNC:SELP)
+a(CHEBI:heme) increases p(HGNC:CLEC1B)
+p(HGNC:CLEC1B) increases bp(GO:"platelet aggregation")
+complex(a(CHEBI:heme), p(HGNC:CLEC1B)) increases bp(GO:"platelet activation")
+a(CHEBI:heme) increases p(HGNC:PLCG2)
+p(HGNC:PLCG2) increases a(HM:"NOX")
+a(CHEBI:heme) increases p(HGNC:SYK)
+bp(GO:"platelet activation") increases bp(GO:"platelet aggregation")
+
+p(HGNC:SYK)	increases p(HGNC:NFKB1)
+p(HGNC:TLR4) increases p(HGNC:NFKB1)
+p(HGNC:TLR4) increases p(HGNC:SYK)
+p(HGNC:SYK) increases p(HGNC:PLCG2)
+p(HGNC:TLR4) increases p(HGNC:PLCG2)
+
+p(HGNC:ITGA2B)	partOf	complex(p(HGNC:ITGA2B), p(HGNC:ITGA3))
+p(HGNC:ITGA3)	partOf	complex(p(HGNC:ITGA2B), p(HGNC:ITGA3))
+
+UNSET Observation
+SET Observation = "KD=200nM"
+a(CHEBI:heme) partOf a(HM:"Heme-CLEC2 complex")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Dose = "1.56 ‐ 50 μM"
+SET Injection = "‐ (platelets)"
+SET Setting = "in vitro"
+SET Observation = "Platelet"
+
+a(CHEBI:heme) increases p(HGNC:CLEC1B)
+p(HGNC:CLEC1B) increases bp(GO:"platelet aggregation")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "6375390"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9913"
+SET Solvent = "0.25% Na2CO3 (pH 7.4), diluted with isotonic saline or 50 mM HEPES buffer"
+SET Dose = "2 ‐ 40 μg/ml (≙ 3.2 ‐ 63.1 μM)"
+SET Injection = "‐ (BAECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial cells"
+
+a(CHEBI:heme) partOf a(MESH:"Endothelial Cells")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9913"
+SET Solvent = "0.25% Na2CO3 (pH 7.4), diluted with isotonic saline or 50 mM HEPES buffer"
+SET Dose = "100 μg/ml (≙ 158 μM)"
+SET Injection = "‐ (BAECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial cells"
+
+a(CHEBI:heme) increases bp(HM:"Endothelial cell detachment")
+bp(HM:"Endothelial cell detachment") partOf a(MESH:"Endothelial Cells")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9913"
+SET Solvent = "0.25% Na2CO3 (pH 7.4), diluted with isotonic saline or 50 mM HEPES buffer"
+SET Dose = "40 μg/ml (≙ 63.1 μM)"
+SET Injection = "‐ (BAECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial cells"
+
+a(CHEBI:heme) increases bp(GO:"platelet aggregation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "2030579"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9823"
+SET Solvent = "20 mM NaOH, diluted with buffer"
+SET Injection = "‐ (PAECs)"
+SET Setting = "in vivo"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) partOf a(MESH:"Endothelial Cells")
+a(MESH:"Endothelial Cells") decreases a(CHEBI:heme)
+a(CHEBI:heme) increases bp(MESH:"Oxidative Stress")
+bp(HM:oxidation) increases bp(MESH:"Oxidative Stress")
+
+UNSET Species
+UNSET Solvent
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "1931871"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9823"
+SET Solvent = 20 mM NaOH, diluted with buffer"
+SET Injection = "‐ (PAECs)"
+SET Setting = "in vivo"
+SET Observation = "Endothelial Cells"
+
+bp(HM:"oxidation") partOf a(MESH:"Lipoproteins, LDL")
+a(CHEBI:heme) increases bp(HM:"oxidation")
+a(CHEBI:heme) increases bp(MESH:"Cytotoxicity, Immunologic")
+
+UNSET Species
+UNSET Solvent
+UNSET Setting
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "19276082"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Dose = "1 mM"
+SET Injection = "‐ (mouse aorta)"
+SET Setting = "ex vivo"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases bp(HM:"endothelial denudation")
+a(CHEBI:heme) increases bp(GO:"platelet aggregation")
+a(CHEBI:heme) increases a(CHEBI:Collagen)
+
+bp(HM:"endothelial denudation")	partOf	a(MESH:"Endothelial Cells")
+
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "22245770"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9913"
+SET Solvent = "DMSO"
+SET Dose = "10 ‐ 50 μM"
+SET Injection = "‐ (BAECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases a(MESH:"L-Lactate Dehydrogenase")
+a(CHEBI:heme) increases bp(GO:"apoptotic process")
+bp(GO:"apoptotic process") increases a(MESH:"L-Lactate Dehydrogenase")
+a(CHEBI:heme) decreases a(CHEBI:ATP)
+a(CHEBI:heme) increases bp(HM:"lipid peroxidation")
+a(CHEBI:heme) increases bp(MESH:"Autophagy")
+a(CHEBI:heme) increases bp(GO:"mitophagy")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "24277079"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Solvent = "D‐sorbitol, Na2CO3, saline (as Panhematin®)"
+SET Dose = "0.4 ‐ 32 μmol/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:TLR4)
+a(CHEBI:heme) increases bp(HM:"Endothelial cell activation")
+a(CHEBI:heme) increases surf(a(MESH:"Cell Adhesion Molecules"))
+a(CHEBI:heme) increases path(HM:"vaso occlusion")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "D‐sorbitol, Na2CO3, saline (as Panhematin®)"
+SET Dose = "20 μM"
+SET Injection = "‐ (HUVECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:TLR4)
+a(CHEBI:heme) increases bp(HM:"Endothelial cell activation")
+a(CHEBI:heme) increases surf(a(MESH:"Cell Adhesion Molecules"))
+a(CHEBI:heme) increases path(HM:"vaso occlusion")
+
+bp(HM:"Endothelial cell activation")	partOf	a(MESH:"Endothelial Cells")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "25827830"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "~20 nM (50 control MPs/μl), ~65 nM (50 SCD MPs/μl)"
+SET Injection = "- (HUVECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) partOf a(HM:"Hemeladen Microparticles")
+a(HM:"Hemeladen Microparticles") increases a(CHEBI:heme)
+path(MESH:Hemolysis) increases a(HM:"Hemeladen Microparticles")
+a(CHEBI:heme) partOf a(MESH:"Endothelial Cells")
+p(HGNC:SELP) partOf a(MESH:"Cell Adhesion Molecules")
+p(HGNC:VWF) partOf a(MESH:"Cell Adhesion Molecules")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Dose = "300 MPs/μl"
+SET Injection = "intravenous"
+SET Setting = "ex vivo"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases a(MESH:"Reactive Oxygen Species")
+a(CHEBI:heme) increases bp(GO:"apoptotic process")
+a(MESH:"Hemopexin") decreases a(MESH:"Reactive Oxygen Species")
+a(CHEBI:heme) increases p(HGNC:TLR4)
+p(HGNC:TLR4) increases a(MESH:"Reactive Oxygen Species")
+
+UNSET Observation
+SET Observation = "Endothelial Cells, Renal Arteries"
+a(CHEBI:heme) decreases bp(MESH:"Blood Flow Velocity"))
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Dose = "100 nM"
+SET Injection = "intravenous"
+SET Setting = "ex vivo"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases a(HM:"ACH")
+a(HM:"ACH") increases bp(GO:"vasodilation")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "28421813"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "0,25 M NaOH, diluted in PBS (pH 7.4)"
+SET Dose = "5 ‐ 100 μM"
+SET Injection = "- (HLMVECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases bp(MESH:"Permeability")
+a(CHEBI:heme) increases bp(GO:"apoptotic process")
+a(CHEBI:heme) increases p(HGNC:MLKL)
+p(HGNC:TLR4) increases p(HGNC:MLKL)
+p(HGNC:MLKL) increases bp(HM:Necroptosis)
+a(CHEBI:heme) increases p(HGNC:TLR4)
+p(HGNC:TLR4) increases bp(GO:"apoptotic process")
+p(HGNC:TLR4) increases bp(MESH:"Permeability")
+bp(HM:"endothelial denudation") increases bp(MESH:Permeability)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "30619356"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "50 mM NaOH, 145 mM NaCl, diluted with medium"
+SET Dose = "12.5 ‐ 50 μM"
+SET Injection = "‐ (HUVECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:C3)
+a(CHEBI:heme) increases p(HGNC:THBD)
+a(CHEBI:heme) increases a(HM:"Heme Oxygenase")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "50 mM NaOH, 145 mM NaCl, diluted with medium"
+SET Dose = "12.5 ‐ 50 μM"
+SET Injection = "‐ (HMECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:C3)
+a(CHEBI:heme) increases p(HGNC:THBD)
+a(CHEBI:heme) increases a(HM:"Heme Oxygenase")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "50 mM NaOH, 145 mM NaCl, diluted with medium"
+SET Dose = "12.5 ‐ 50 μM"
+SET Injection = "‐ (GENCs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:C3)
+a(CHEBI:heme) increases p(HGNC:THBD)
+a(CHEBI:heme) increases a(HM:"Heme Oxygenase")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "50 mM NaOH, 145 mM NaCl, diluted with medium"
+SET Dose = "12.5 ‐ 50 μM"
+SET Injection = "‐ (HRGECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:C3)
+a(CHEBI:heme) increases p(HGNC:THBD)
+a(CHEBI:heme) increases a(HM:"Heme Oxygenase")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Solvent = "50 mM NaOH, 145 mM NaCl, diluted with PBS"
+SET Dose = "40 μmol/kg"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:C3)
+a(CHEBI:heme) increases p(HGNC:THBD)
+a(CHEBI:heme) increases a(HM:"Heme Oxygenase")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "29925688"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "50 mM NaOH, 145 mM NaCl, diluted with vehicle"
+SET Dose = "50 μM"
+SET Injection = "‐ (HUVECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:SELP)
+a(CHEBI:heme) increases p(MESH:"Complement System Proteins")
+p(HGNC:C3) partOf p(MESH:"Complement System Proteins")
+a(MESH:"Hemopexin") decreases p(MESH:"Complement System Proteins")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "29905377"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "0.1 M NaOH, diluted in FBS"
+SET Dose = "20 ‐ 40 μM"
+SET Injection = "‐ (ECs)"
+SET Setting = "in vitro"
+SET Observation = "Endothelial Cells"
+
+a(CHEBI:heme) increases p(HGNC:SELP)
+a(CHEBI:heme) increases p(HGNC:VCAM1)
+p(HGNC:VCAM1) partOf a(MESH:"Cell Adhesion Molecules")
+a(CHEBI:heme) partOf a(MESH:"Endothelial Cells")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "19867688"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9986"
+SET Solvent = "0.85% NaCl + 2% Na2CO3 alkaline solution"
+SET Dose = "< 15 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Rarely: RBC count ↓ (fast regeneration)"
+
+a(CHEBI:heme) decreases a(MESH:Erythrocytes)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9986"
+SET Solvent = "0.85% NaCl + 2% Na2CO3 alkaline solution"
+SET Dose = "20 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "RBC count ↓ (decreasesof ≥ 1000000 cells)"
+
+a(CHEBI:heme) decreases a(MESH:Erythrocytes)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+
+SET Citation = {"PubMed", "7276166"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Solvent = "5 mM NaOH, diluted with medium"
+SET Dose = "0 ‐ 7 μM"
+SET Injection = "‐ (RBCs)"
+SET Setting = "in vitro"
+SET Observation = "RBC"
+
+a(CHEBI:heme) increases path(MESH:Hemolysis)
+a(CHEBI:heme) increases a(CHEBI:heme)
+a(HM:"GSH") partOf a(HM:"GSH/GSSG ratio")
+a(HM:"GSSH") partOf a(HM:"GSH/GSSG ratio")
+a(CHEBI:heme) decreases a(CHEBI:ATP)
+a(CHEBI:heme) decreases a(HM:"GSH")
+a(CHEBI:heme) decreases p(HM:"Hemoglobin")
+
+a(CHEBI:heme)	partOf	p(HM:"hemoglobin")
+p(HM:"hemoglobin") partOf a(MESH:Erythrocytes)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "4044594"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "0.01 M NaOH, diluted with water"
+SET Dose = "0 ‐ 500 μM"
+SET Injection = "‐ (RBCs)"
+SET Setting = "in vitro"
+SET Observation = "RBC"
+
+a(CHEBI:heme) decreases p(MESH:"Spectrin")
+p(MESH:"Spectrin") increases bp(HM:"RBC membrane stability")
+a(CHEBI:heme) decreases bp(HM:"RBC membrane stability")
+a(CHEBI:heme) decreases p(HM:"Protein 4.1")
+p(HM:"Protein 4.1") increases bp(HM:"RBC membrane stability")
+
+a(HM:"RBC membrane")	partOf	a(MESH:Erythrocytes)
+p(MESH:Spectrin)	partOf	a(HM:"RBC membrane")
+p(HM:"Protein 4.1")	partOf	a(HM:"RBC membrane")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "4063370"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "20 mM NaOH, diluted with water"
+SET Dose = "0.2 ‐ 40 μM"
+SET Injection = "‐ (RBCs)"
+SET Setting = "in vitro"
+SET Observation = "RBC"
+
+a(CHEBI:heme) increases path(MESH:Hemolysis)
+path(MESH:Hemolysis) increases a(CHEBI:heme)
+a(CHEBI:heme) partOf a(HM:"RBC membrane")
+a(HM:"RBC membrane") partOf bp(HM:"RBC membrane stability")
+p(HGNC:ALB) decreases a(CHEBI:heme)
+path(MESH:Hemolysis) increases p(HM:hemoglobin)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "19867501"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10141"
+SET Solvent = "0.85% salt solution"
+SET Dose = "30 ‐ 54 mg/kg"
+SET Injection = "intraperitoneal, subcutaneous, intravenous"
+SET Setting = "in vivo"
+SET Observation = "Polymorphonuclear leucocyte ↑"
+
+a(CHEBI:heme) increases a(MESH:Neutrophils)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "19867688"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9986"
+SET Solvent = "0.85% NaCl + 2% Na2CO3 alkaline solution"
+SET Dose = "10 mg/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Leukocyte"
+
+a(CHEBI:heme) increases path(MESH:Leukocytosis)
+a(MESH:Leukocytes) partOf path(MESH:Leukocytosis)
+a(CHEBI:heme) increases a(MESH:Leukocytes)
+a(CHEBI:heme) increases a(MESH:"Leukocytes, Mononuclear")
+a(MESH:"Leukocytes, Mononuclear") partOf a(MESH:Leukocytes)
+a(CHEBI:heme) increases a(MESH:Basophils)
+a(MESH:Basophils) partOf a(MESH:Leukocytes)
+a(CHEBI:heme) decreases a(MESH:Eosinophils)
+a(MESH:Eosinophils) partOf a(MESH:Leukocytes)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9986"
+SET Solvent = "0.85% NaCl + 2% Na2CO3 alkaline solution"
+SET Dose = "20 mg/kg (daily)"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Leukocyte"
+
+a(CHEBI:heme) increases path(MESH:Leukocytosis)
+a(MESH:Leukocytes) partOf path(MESH:Leukocytosis)
+path(MESH:Leukocytosis) increases a(MESH:Leukocytes)
+a(CHEBI:heme) increases a(MESH:Leukocytes)
+a(CHEBI:heme) increases a(MESH:"Leukocytes, Mononuclear")
+a(MESH:"Leukocytes, Mononuclear") partOf a(MESH:Leukocytes)
+a(CHEBI:heme) increases a(MESH:Basophils)
+a(MESH:Basophils) partOf a(MESH:Leukocytes)
+a(CHEBI:heme) decreases a(MESH:Eosinophils)
+a(MESH:Eosinophils) partOf a(MESH:Leukocytes)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "1740631"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Injection = "‐ (PBMC)"
+SET Setting = "in vitro"
+SET Observation = "Leukocyte"
+
+a(CHEBI:heme) increases a(MESH:"Leukocytes, Mononuclear")
+a(MESH:"Leukocytes, Mononuclear") increases bp(GO:"coagulation")
+
+UNSET Species
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "11535514"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Solvent = "0.1 N NaOH, 10 mM Trisbase (pH 8.6)"
+SET Dose = "750 μM (intravascular conc.)"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Leukocyte"
+
+a(MESH:"Leukocytes") partOf bp(HM:"Leukocyte accumulation")
+a(CHEBI:heme) increases bp(HM:"Leukocyte accumulation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "12010821"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "DMSO, diluted with PBS"
+SET Dose = "0.1 ‐ 20 μM"
+SET Injection = "‐ (PMNs)"
+SET Setting = "in vitro"
+SET Observation = "Leukocyte"
+
+a(MESH:Neutrophils) partOf a(MESH:Leukocytes)
+a(CHEBI:heme) increases bp(HM:"Neutrophil recruitment")
+a(MESH:Neutrophils) partOf bp(HM:"Neutrophil recruitment")
+a(CHEBI:heme) increases p(MESH:"Protein Kinase C")
+p(MESH:"Protein Kinase C") increases bp(HM:"Neutrophil recruitment")
+a(CHEBI:heme) increases p(MESH:"Actins")
+a(CHEBI:heme) increases p(HGNC:CXCL8)
+p(HGNC:NFKB1) increases p(HGNC:CXCL8)
+p(HGNC:TLR4) increases p(HGNC:CXCL8)
+
+
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10114"
+SET Solvent = "DMSO, diluted with PBS"
+SET Dose = "30 – 300 nmol/cavity"
+SET Injection = "intrathoracic"
+SET Setting = "in vivo"
+SET Observation = "Leukocyte"
+
+bp(HM:"Neutrophil recruitment") increases bp(HM:"Neutrophil migration")
+a(CHEBI:heme) increases bp(HM:"Neutrophil migration")
+
+a(MESH:Neutrophils)	partOf	bp(HM:"Neutrophil migration")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "12649161"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10114"
+SET Solvent = "with Trizma base in 0.1 M NaOH, diluted in saline, pH 8"
+SET Dose = "750 μM"
+SET Injection = "intradermally"
+SET Setting = "in vivo"
+SET Observation = "Leukocyte"
+
+a(CHEBI:heme) increases bp(HM:"Leukocyte recruitment")
+a(MESH:Leukocytes) partOf bp(HM:"Leukocyte recruitment")
+a(CHEBI:heme) decreases bp(GO:"neutrophil apoptotic process")
+a(MESH:Leukocytes) partOf bp(GO:"neutrophil apoptotic process")
+bp(GO:"neutrophil apoptotic process") partOf bp(GO:"apoptotic process")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "15265937"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "DMSO, diluted with PBS"
+SET Dose = "1 ‐ 50 μM"
+SET Injection = "‐(neutrophils)"
+SET Setting = "in vitro"
+SET Observation = "Leukocyte"
+
+a(MESH:Neutrophils) partOf bp(GO:"neutrophil apoptotic process")
+a(CHEBI:heme) increases p(HGNC:BCL2L1)
+p(HGNC:BCL2L1) decreases bp(GO:"apoptotic process")
+a(CHEBI:heme) increases p(HGNC:MAPK1)
+p(HGNC:TLR4) increases p(HGNC:MAPK1)
+a(CHEBI:heme) increases p(HGNC:AKT1)
+p(HGNC:TLR4) increases p(HGNC:AKT1)
+a(HM:"anti-apoptotic proteins") decreases bp(GO:"apoptotic process")
+bp(GO:"apoptotic process") decreases bp(MESH:"Cell Survival")
+a(CHEBI:heme) increases a(HM:"anti-apoptotic proteins")
+p(HGNC:BCL2L1) partOf a(HM:"anti-apoptotic proteins")
+p(HGNC:BCL2) partOf a(HM:"anti-apoptotic proteins")
+a(CHEBI:heme) decreases a(HM:"pro-apoptotic proteins")
+p(HGNC:BAD) partOf a(HM:"pro-apoptotic proteins")
+a(CHEBI:heme) decreases p(HGNC:BAD)
+a(CHEBI:heme) increases p(HGNC:NFKB1)
+a(HM:"pro-apoptotic proteins") increases bp(GO:"apoptotic process")
+a(HM:"anti-apoptotic proteins") increases bp(MESH:"Cell Survival")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "17849050"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10114"
+SET Solvent = "< 0.5% DMSO"
+SET Dose = "50 mg/kg"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+SET Observation = "Higher total leucocyte count (x ~1.9), no changes of lymphocyte cell number"
+
+a(CHEBI:heme) increases a(MESH:Leukocytes)
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "24277079"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Solvent = "D‐sorbitol, Na2CO3, saline (as Panhematin®)"
+SET Dose = "3.2 μmol/kg"
+SET Injection = "intravenous"
+SET Setting = "in vivo"
+SET Observation = "Leukocyte"
+
+a(CHEBI:heme) increases p(HGNC:TLR4)
+p(HGNC:TLR4) increases bp(GO:"leukocyte cell-cell adhesion")
+a(CHEBI:heme) increases bp(GO:"leukocyte cell-cell adhesion")
+a(CHEBI:heme) increases bp(GO:"leukocyte tethering or rolling")
+a(MESH:Leukocytes) partOf bp(GO:"leukocyte tethering or rolling")
+a(MESH:Neutrophils) increases bp(HM:"neutrophic extracellular trap formation")
+
+a(MESH:Leukocytes)	partOf	bp(GO:"leukocyte cell-cell adhesion")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "24620350"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "10090"
+SET Solvent = "DMSO, diluted in Hanks balanced salt solution"
+SET Dose = "50 μmol/kg"
+SET Injection = "intraperitoneal"
+SET Setting = "in vivo"
+SET Observation = "Leukocyte"
+
+a(CHEBI:heme) increases bp(HM:"neutrophic extracellular trap formation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+
+
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Solvent = "DMSO, diluted in Hank’s balanced salt solution"
+SET Dose = "10 ‐ 20 μM"
+SET Injection = "‐ (BM neutrophils)"
+SET Setting = "in vitro"
+SET Observation = "Leukocyte"
+
+a(CHEBI:heme) increases bp(HM:"neutrophic extracellular trap formation")
+
+UNSET Species
+UNSET Solvent
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+
+
+
+SET Citation = {"PubMed", "28955779"}
+SET Evidence = "From Supplementary Table 3"
+
+SET Species = "9606"
+SET Dose = "1.5 ‐ 38.3 μM"
+SET Injection = "‐ (neutrophils)"
+SET Setting = "in vitro"
+SET Observation = "Leukocyte"
+
+a(CHEBI:heme) increases bp(HM:"neutrophic extracellular trap formation")
+
+UNSET Species
+UNSET Dose
+UNSET Setting
+UNSET Injection
+UNSET Observation
+UNSET Citation
+

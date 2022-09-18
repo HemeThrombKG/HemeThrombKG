@@ -1,0 +1,250 @@
+# This document was created by PyBEL v0.13.1 and bel-resources v0.0.1 on Wed Apr 27 14:52:11 2022
+
+# This document was created by PyBEL v0.0.1 on Wed Apr 27 14:52:11 2022
+
+################################################################################
+#| Metadata
+################################################################################
+
+SET DOCUMENT Name = "Graph from ['hsa04611']"
+SET DOCUMENT Version = "0.0.0"
+SET DOCUMENT Description = "http://www.kegg.jp/kegg-bin/show_pathway?hsa04611"
+SET DOCUMENT Authors = "Daniel Domingo-Fernández, Josep Marín-Llaó and Sarah Mubeen"
+SET DOCUMENT ContactInfo = "daniel.domingo.fernandez@scai.fraunhofer.de"
+
+################################################################################
+#| Namespaces
+################################################################################
+
+# Enumerated Namespaces
+
+DEFINE NAMESPACE GOCC AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/go-cellular-component/go-cellular-component-20170511.belns"
+DEFINE NAMESPACE HGNC           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/hgnc-names.belns"
+DEFINE NAMESPACE CHEBI          AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/chebi-names.belns"
+DEFINE NAMESPACE GO             AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/go-names.belns"
+
+DEFINE NAMESPACE HM        AS PATTERN ".*"
+
+################################################################################
+#| Annotations
+################################################################################
+
+# Regular Expression Annotations
+
+DEFINE ANNOTATION Pathway     AS PATTERN ".*"
+DEFINE ANNOTATION PathwayID     AS PATTERN ".*"
+DEFINE ANNOTATION EdgeTypes     AS PATTERN ".*"
+
+DEFINE ANNOTATION Database AS LIST {"kegg", "reactome", "wikipathways"}
+
+################################################################################
+#| Statements
+################################################################################
+
+
+SET Citation = {"PubMed", "123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "kegg"
+SET Pathway = "Platelet activation"
+SET PathwayID = "hsa04611"
+
+act(p(HGNC:AKT1)) increases p(HGNC:NOS3, pmod(Ph))
+
+act(p(HGNC:PRKACA)) increases p(HGNC:VASP, pmod(Ph))
+
+act(p(HGNC:LYN)) increases p(HGNC:FCER1G, pmod(Ph))
+
+act(p(HGNC:FYN)) increases p(HGNC:FCER1G, pmod(Ph))
+
+act(p(HGNC:SRC)) increases p(HGNC:ARHGAP35, pmod(Ph))
+
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################
+SET Citation = {"PubMed", "10592173"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "kegg"
+SET Pathway = "Platelet activation"
+SET PathwayID = "hsa04611"
+
+p(HGNC:F2R) increases act(p(HGNC:GNA13))
+p(HGNC:F2RL3) increases act(p(HGNC:GNA13))
+
+p(HGNC:F2R) increases act(p(HGNC:GNAQ))
+p(HGNC:F2RL3) increases act(p(HGNC:GNAQ))
+
+p(HGNC:P2RY1) increases act(p(HGNC:GNAQ))
+
+p(HGNC:TBXA2R) increases act(p(HGNC:GNA13))
+
+p(HGNC:TBXA2R) increases act(p(HGNC:GNAQ))
+
+p(HGNC:PLCB1) increases act(a(CHEBI:"1D-myo-inositol 1,4,5-trisphosphate"))
+
+p(HGNC:PLCB1) increases act(a(CHEBI:diglyceride))
+
+p(HGNC:GP6) association p(HGNC:LYN)
+
+p(HGNC:GP6) association p(HGNC:FYN)
+
+p(HGNC:GP6) association p(HGNC:FCER1G)
+
+p(HGNC:ITGA2) increases act(p(HGNC:PIK3CA))
+
+p(HGNC:PLCG2) increases act(a(CHEBI:"1D-myo-inositol 1,4,5-trisphosphate"))
+
+p(HGNC:PLCG2) increases act(a(CHEBI:diglyceride))
+
+p(HGNC:RASGRP1) increases act(p(HGNC:RAP1A))
+
+p(HGNC:RASGRP1) increases act(p(HGNC:PLA2G4A))
+
+p(HGNC:RAP1A) increases act(p(HGNC:APBB1IP))
+
+p(HGNC:APBB1IP) increases act(p(HGNC:TLN1))
+
+p(HGNC:TLN1) increases act(p(HGNC:ITGA2B))
+
+p(HGNC:ITGA2B) increases act(p(HGNC:GNA13))
+
+p(HGNC:ITGA2B) association p(HGNC:FGA)
+p(HGNC:FGA) increases bp(GO:"platelet aggregation")
+
+p(HGNC:PIK3CA) increases act(complex(p(HGNC:BTK), p(HGNC:LCP2), p(HGNC:PLCG2)))
+
+p(HGNC:PIK3CA) increases act(p(HGNC:AKT1))
+
+p(HGNC:AKT1) increases act(p(HGNC:NOS3))
+
+p(HGNC:NOS3) increases act(a(CHEBI:"nitric oxide"))
+
+p(HGNC:GUCY1A1) increases act(a(CHEBI:"3',5'-cyclic GMP"))
+
+p(HGNC:PRKG1) increases act(p(HGNC:MAPK11))
+
+p(HGNC:MAPK11) increases act(p(HGNC:MAPK1))
+
+p(HGNC:MAPK1) increases act(p(HGNC:PLA2G4A))
+
+p(HGNC:GNAQ) increases act(p(HGNC:PLCB1))
+
+p(HGNC:GNA13) increases act(p(HGNC:ARHGEF1))
+
+p(HGNC:GNA13) increases act(p(HGNC:SRC))
+
+p(HGNC:ARHGEF1) increases act(p(HGNC:RHOA))
+
+p(HGNC:RHOA) increases act(p(HGNC:ROCK1))
+
+p(HGNC:ROCK1) increases act(p(HGNC:PPP1CA))
+
+p(HGNC:PPP1CA) increases act(p(HGNC:MYL12A))
+
+p(HGNC:MYLK) increases act(p(HGNC:MYL12A))
+
+p(HGNC:P2RY12) increases act(p(HGNC:GNAI1))
+
+p(HGNC:GNAI1) increases act(p(HGNC:PIK3CG))
+
+p(HGNC:GNAI1) decreases act(p(HGNC:ADCY1))
+
+p(HGNC:ADCY1) increases act(a(CHEBI:"3',5'-cyclic AMP"))
+
+p(HGNC:PTGIR) increases act(p(HGNC:GNAS))
+
+p(HGNC:GNAS) increases act(p(HGNC:ADCY1))
+
+p(HGNC:PLA2G4A) increases act(a(CHEBI:"arachidonic acid"))
+
+p(HGNC:STIM1) increases act(p(HGNC:ORAI1))
+
+p(HGNC:VWF) increases act(p(HGNC:GP1BA))
+
+p(HGNC:PTGS1) increases act(a(CHEBI:"prostaglandin H2"))
+
+p(HGNC:PTGS1) increases act(a(CHEBI:"prostaglandin G2"))
+
+p(HGNC:TBXAS1) increases act(a(CHEBI:"thromboxane A2"))
+
+p(HGNC:PRKACA) increases act(p(HGNC:VASP))
+
+p(HGNC:VASP) increases act(p(HGNC:ACTG1))
+p(HGNC:VASP) increases act(p(HGNC:ACTB))
+
+p(HGNC:ACTB) increases act(p(HGNC:ITGA2B))
+p(HGNC:ACTB) increases act(p(HGNC:ITGB3))
+p(HGNC:ACTG1) increases act(p(HGNC:ITGA2B))
+p(HGNC:ACTG1) increases act(p(HGNC:ITGB3))
+
+p(HGNC:COL1A1) increases act(p(HGNC:GP6))
+
+p(HGNC:COL1A1) increases act(p(HGNC:ITGA2))
+p(HGNC:COL1A1) increases act(p(HGNC:ITGB1))
+
+p(HGNC:FERMT3) increases act(p(HGNC:ITGA2B))
+p(HGNC:FERMT3) increases act(p(HGNC:ITGB3))
+
+p(HGNC:FCER1G) association p(HGNC:SYK)
+
+p(HGNC:FCER1G) increases act(p(HGNC:PIK3CA))
+
+p(HGNC:LYN) increases act(p(HGNC:FCER1G))
+
+p(HGNC:FYN) increases act(p(HGNC:FCER1G))
+
+p(HGNC:SYK) increases act(p(HGNC:PLCG2))
+
+p(HGNC:PRKCZ) increases act(p(HGNC:RAP1A))
+p(HGNC:PRKCI) increases act(p(HGNC:RAP1B))
+
+p(HGNC:SRC) increases act(p(HGNC:ARHGAP35))
+
+p(HGNC:SRC) increases act(p(HGNC:FCGR2A))
+
+p(HGNC:FCGR2A) increases act(p(HGNC:SYK))
+
+p(HGNC:ARHGAP35) decreases act(p(HGNC:RHOA))
+
+a(CHEBI:"3',5'-cyclic AMP") decreases act(p(HGNC:ITPR1))
+
+a(CHEBI:"3',5'-cyclic AMP") increases act(p(HGNC:PRKACA))
+
+a(CHEBI:"calcium(2+)") increases act(p(HGNC:MYLK))
+
+a(CHEBI:"calcium(2+)") increases act(p(HGNC:RASGRP1))
+
+a(CHEBI:"1D-myo-inositol 1,4,5-trisphosphate") increases act(p(HGNC:ITPR1))
+
+a(CHEBI:diglyceride) increases act(p(HGNC:PRKCI))
+
+a(CHEBI:diglyceride) increases act(p(HGNC:RASGRP1))
+
+a(CHEBI:Thrombin) increases act(p(HGNC:F2RL3))
+a(CHEBI:Thrombin) increases act(p(HGNC:F2R))
+
+a(CHEBI:ADP) increases act(p(HGNC:P2RX1))
+
+a(CHEBI:ADP) increases act(p(HGNC:P2RY1))
+
+a(CHEBI:ADP) increases act(p(HGNC:P2RY12))
+
+a(CHEBI:"thromboxane A2") increases act(p(HGNC:TBXA2R))
+
+a(CHEBI:"nitric oxide") increases act(p(HGNC:GUCY1A1))
+
+a(CHEBI:"3',5'-cyclic GMP") increases act(p(HGNC:PRKG1))
+
+a(CHEBI:"1-phosphatidyl-1D-myo-inositol 3,4,5-trisphosphate") increases act(p(HGNC:RASGRP1))
+
+a(CHEBI:"1-phosphatidyl-1D-myo-inositol 3,4,5-trisphosphate") increases act(p(HGNC:AKT1))
+
+a(CHEBI:"prostaglandin I2") increases act(p(HGNC:PTGIR))
+
+a(CHEBI:ATP) increases act(p(HGNC:P2RX1))
+
+complex(p(HGNC:GP1BA), p(HGNC:GP1BB), p(HGNC:GP5), p(HGNC:GP9)) association p(HGNC:LYN)
+
+UNSET {Database, Pathway, PathwayID}

@@ -1,0 +1,648 @@
+# This document was created by PyBEL v0.13.1 and bel-resources v0.0.1 on Wed Apr 27 14:52:11 2022
+
+# This document was created by PyBEL v0.0.1 on Wed Apr 27 14:52:11 2022
+
+################################################################################
+#| Metadata
+################################################################################
+
+SET DOCUMENT Name = "Merged graph from ['hsa04611', 'R-HSA-140834', 'R-HSA-140837', 'R-HSA-140875', 'R-HSA-140877', 'R-HSA-76002', 'R-HSA-76009', 'WP272']"
+SET DOCUMENT Version = "0.0.0"
+SET DOCUMENT Description = "http://www.kegg.jp/kegg-bin/show_pathway?hsa04611"
+SET DOCUMENT Authors = "Daniel Domingo-Fernández, Josep Marín-Llaó and Sarah Mubeen"
+SET DOCUMENT ContactInfo = "daniel.domingo.fernandez@scai.fraunhofer.de"
+
+################################################################################
+#| Namespaces
+################################################################################
+
+# Enumerated Namespaces
+
+DEFINE NAMESPACE GOCC AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/go-cellular-component/go-cellular-component-20170511.belns"
+DEFINE NAMESPACE HGNC           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/hgnc-names.belns"
+DEFINE NAMESPACE CHEBI          AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/chebi-names.belns"
+DEFINE NAMESPACE GO             AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/go-names.belns"
+
+DEFINE NAMESPACE HM        AS PATTERN ".*"
+
+################################################################################
+#| Annotations
+################################################################################
+
+# Regular Expression Annotations
+
+DEFINE ANNOTATION Pathway     AS PATTERN ".*"
+DEFINE ANNOTATION PathwayID     AS PATTERN ".*"
+DEFINE ANNOTATION EdgeTypes     AS PATTERN ".*"
+
+DEFINE ANNOTATION Database AS LIST {"kegg", "reactome", "wikipathways"}
+
+################################################################################
+#| Statements
+################################################################################
+
+SET Citation = {"PubMed", "123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "kegg"
+SET Pathway = "Platelet activation"
+SET PathwayID = "hsa04611"
+
+act(p(HGNC:AKT1)) increases p(HGNC:NOS3, pmod(Ph))
+
+act(p(HGNC:PRKACA)) increases p(HGNC:VASP, pmod(Ph))
+
+act(p(HGNC:LYN)) increases p(HGNC:FCER1G, pmod(Ph))
+
+act(p(HGNC:FYN)) increases p(HGNC:FCER1G, pmod(Ph))
+
+act(p(HGNC:SRC)) increases p(HGNC:ARHGAP35, pmod(Ph))
+
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################
+SET Citation = {"PubMed", "10592173"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "kegg"
+SET Pathway = "Platelet activation"
+SET PathwayID = "hsa04611"
+
+p(HGNC:F2R) increases act(p(HGNC:GNA13))
+p(HGNC:F2RL3) increases act(p(HGNC:GNA13))
+
+p(HGNC:F2R) increases act(p(HGNC:GNAQ))
+p(HGNC:F2RL3) increases act(p(HGNC:GNAQ))
+
+p(HGNC:P2RY1) increases act(p(HGNC:GNAQ))
+
+p(HGNC:TBXA2R) increases act(p(HGNC:GNA13))
+
+p(HGNC:TBXA2R) increases act(p(HGNC:GNAQ))
+
+p(HGNC:PLCB1) increases act(a(CHEBI:"1D-myo-inositol 1,4,5-trisphosphate"))
+
+p(HGNC:PLCB1) increases act(a(CHEBI:diglyceride))
+
+p(HGNC:GP6) association p(HGNC:LYN)
+
+p(HGNC:GP6) association p(HGNC:FYN)
+
+p(HGNC:GP6) association p(HGNC:FCER1G)
+
+p(HGNC:ITGA2) increases act(p(HGNC:PIK3CA))
+
+p(HGNC:PLCG2) increases act(a(CHEBI:"1D-myo-inositol 1,4,5-trisphosphate"))
+
+p(HGNC:PLCG2) increases act(a(CHEBI:diglyceride))
+
+p(HGNC:RASGRP1) increases act(p(HGNC:RAP1A))
+
+p(HGNC:RASGRP1) increases act(p(HGNC:PLA2G4A))
+
+p(HGNC:RAP1A) increases act(p(HGNC:APBB1IP))
+
+p(HGNC:APBB1IP) increases act(p(HGNC:TLN1))
+
+p(HGNC:TLN1) increases act(p(HGNC:ITGA2B))
+
+p(HGNC:ITGA2B) increases act(p(HGNC:GNA13))
+
+p(HGNC:ITGA2B) association p(HGNC:FGA)
+p(HGNC:FGA) increases bp(GO:"platelet aggregation")
+
+p(HGNC:PIK3CA) increases act(complex(p(HGNC:BTK), p(HGNC:LCP2), p(HGNC:PLCG2)))
+
+p(HGNC:PIK3CA) increases act(p(HGNC:AKT1))
+
+p(HGNC:AKT1) increases act(p(HGNC:NOS3))
+
+p(HGNC:NOS3) increases act(a(CHEBI:"nitric oxide"))
+
+p(HGNC:GUCY1A1) increases act(a(CHEBI:"3',5'-cyclic GMP"))
+
+p(HGNC:PRKG1) increases act(p(HGNC:MAPK11))
+
+p(HGNC:MAPK11) increases act(p(HGNC:MAPK1))
+
+p(HGNC:MAPK1) increases act(p(HGNC:PLA2G4A))
+
+p(HGNC:GNAQ) increases act(p(HGNC:PLCB1))
+
+p(HGNC:GNA13) increases act(p(HGNC:ARHGEF1))
+
+p(HGNC:GNA13) increases act(p(HGNC:SRC))
+
+p(HGNC:ARHGEF1) increases act(p(HGNC:RHOA))
+
+p(HGNC:RHOA) increases act(p(HGNC:ROCK1))
+
+p(HGNC:ROCK1) increases act(p(HGNC:PPP1CA))
+
+p(HGNC:PPP1CA) increases act(p(HGNC:MYL12A))
+
+p(HGNC:MYLK) increases act(p(HGNC:MYL12A))
+
+p(HGNC:P2RY12) increases act(p(HGNC:GNAI1))
+
+p(HGNC:GNAI1) increases act(p(HGNC:PIK3CG))
+
+p(HGNC:GNAI1) decreases act(p(HGNC:ADCY1))
+
+p(HGNC:ADCY1) increases act(a(CHEBI:"3',5'-cyclic AMP"))
+
+p(HGNC:PTGIR) increases act(p(HGNC:GNAS))
+
+p(HGNC:GNAS) increases act(p(HGNC:ADCY1))
+
+p(HGNC:PLA2G4A) increases act(a(CHEBI:"arachidonic acid"))
+
+p(HGNC:STIM1) increases act(p(HGNC:ORAI1))
+
+p(HGNC:VWF) increases act(p(HGNC:GP1BA))
+
+p(HGNC:PTGS1) increases act(a(CHEBI:"prostaglandin H2"))
+
+p(HGNC:PTGS1) increases act(a(CHEBI:"prostaglandin G2"))
+
+p(HGNC:TBXAS1) increases act(a(CHEBI:"thromboxane A2"))
+
+p(HGNC:PRKACA) increases act(p(HGNC:VASP))
+
+p(HGNC:VASP) increases act(p(HGNC:ACTG1))
+p(HGNC:VASP) increases act(p(HGNC:ACTB))
+
+p(HGNC:ACTB) increases act(p(HGNC:ITGA2B))
+p(HGNC:ACTB) increases act(p(HGNC:ITGB3))
+p(HGNC:ACTG1) increases act(p(HGNC:ITGA2B))
+p(HGNC:ACTG1) increases act(p(HGNC:ITGB3))
+
+p(HGNC:COL1A1) increases act(p(HGNC:GP6))
+
+p(HGNC:COL1A1) increases act(p(HGNC:ITGA2))
+p(HGNC:COL1A1) increases act(p(HGNC:ITGB1))
+
+p(HGNC:FERMT3) increases act(p(HGNC:ITGA2B))
+p(HGNC:FERMT3) increases act(p(HGNC:ITGB3))
+
+p(HGNC:FCER1G) association p(HGNC:SYK)
+
+p(HGNC:FCER1G) increases act(p(HGNC:PIK3CA))
+
+p(HGNC:LYN) increases act(p(HGNC:FCER1G))
+
+p(HGNC:FYN) increases act(p(HGNC:FCER1G))
+
+p(HGNC:SYK) increases act(p(HGNC:PLCG2))
+
+p(HGNC:PRKCZ) increases act(p(HGNC:RAP1A))
+p(HGNC:PRKCI) increases act(p(HGNC:RAP1B))
+
+p(HGNC:SRC) increases act(p(HGNC:ARHGAP35))
+
+p(HGNC:SRC) increases act(p(HGNC:FCGR2A))
+
+p(HGNC:FCGR2A) increases act(p(HGNC:SYK))
+
+p(HGNC:ARHGAP35) decreases act(p(HGNC:RHOA))
+
+a(CHEBI:"3',5'-cyclic AMP") decreases act(p(HGNC:ITPR1))
+
+a(CHEBI:"3',5'-cyclic AMP") increases act(p(HGNC:PRKACA))
+
+a(CHEBI:"calcium(2+)") increases act(p(HGNC:MYLK))
+
+a(CHEBI:"calcium(2+)") increases act(p(HGNC:RASGRP1))
+
+a(CHEBI:"1D-myo-inositol 1,4,5-trisphosphate") increases act(p(HGNC:ITPR1))
+
+a(CHEBI:diglyceride) increases act(p(HGNC:PRKCI))
+
+a(CHEBI:diglyceride) increases act(p(HGNC:RASGRP1))
+
+a(CHEBI:Thrombin) increases act(p(HGNC:F2RL3))
+a(CHEBI:Thrombin) increases act(p(HGNC:F2R))
+
+a(CHEBI:ADP) increases act(p(HGNC:P2RX1))
+
+a(CHEBI:ADP) increases act(p(HGNC:P2RY1))
+
+a(CHEBI:ADP) increases act(p(HGNC:P2RY12))
+
+a(CHEBI:"thromboxane A2") increases act(p(HGNC:TBXA2R))
+
+a(CHEBI:"nitric oxide") increases act(p(HGNC:GUCY1A1))
+
+a(CHEBI:"3',5'-cyclic GMP") increases act(p(HGNC:PRKG1))
+
+a(CHEBI:"1-phosphatidyl-1D-myo-inositol 3,4,5-trisphosphate") increases act(p(HGNC:RASGRP1))
+
+a(CHEBI:"1-phosphatidyl-1D-myo-inositol 3,4,5-trisphosphate") increases act(p(HGNC:AKT1))
+
+a(CHEBI:"prostaglandin I2") increases act(p(HGNC:PTGIR))
+
+a(CHEBI:ATP) increases act(p(HGNC:P2RX1))
+
+complex(p(HGNC:GP1BA), p(HGNC:GP1BB), p(HGNC:GP5), p(HGNC:GP9)) association p(HGNC:LYN)
+
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "wikipathways"
+SET Pathway = "Blood Clotting Cascade"
+SET PathwayID = "WP272"
+p(HGNC:SERPINF2) decreases act(p(HGNC:PLG))
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "wikipathways"
+SET EdgeTypes = {"DirectedInteraction", "Interaction"}
+SET Pathway = "Blood Clotting Cascade"
+SET PathwayID = "WP272"
+p(HGNC:SERPINE1) association bp(HM:"Fibrin Complement Receptor 3 Signaling")
+UNSET {Database, EdgeTypes, Pathway, PathwayID}
+
+
+
+################################################################################
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "reactome"
+SET Pathway = "Extrinsic Pathway of Fibrin Clot Formation"
+SET PathwayID = "R-HSA-140834"
+
+act(a(CHEBI:"Ca2+")) -> reaction(reactants(p(HGNC:F3), p(HGNC:F7)), products(complex(p(HGNC:F3), p(HGNC:F7))))
+
+act(complex(p(HGNC:F3), p(HGNC:F7)), ma(catalyticActivity)) -> reaction(reactants(p(HGNC:F10)), products(p(HM:"F10a")))
+
+act(p(HM:"F10a"), ma(catalyticActivity)) -> reaction(reactants(p(HGNC:F7)), products(p(HM:"F7a")))
+
+act(complex(p(HGNC:F3), p(HM:"F7a")), ma(catalyticActivity)) -> reaction(reactants(p(HGNC:F10), a(CHEBI:"Ca2+")), products(p(HM:"F10a")))
+
+rxn(reactants(complex(p(HGNC:F3), p(HM:"F7a")), p(HGNC:TFPI), p(HM:"F10a")), products(complex(p(HGNC:F3), p(HM:"F7a"), p(HGNC:TFPI), p(HM:"F10a"))))
+
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################
+
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "reactome"
+SET Pathway = "Intrinsic Pathway of Fibrin Clot Formation"
+SET PathwayID = "R-HSA-140837"
+
+act(a(CHEBI:"Zn2+")) -> rxn(reactants(p(HGNC:KNG1),p(HGNC:C1QBP)), products(complex(p(HGNC:KNG1),p(HGNC:C1QBP))))
+
+rxn(reactants(complex(p(HGNC:KNG1),p(HGNC:KLKB1), p(HGNC:C1QBP))), products(complex(p(HGNC:KNG1), p(HGNC:KLKB1), p(HGNC:C1QBP))))
+
+act(complex(p(HGNC:KLKB1), p(HGNC:KNG1), p(HGNC:C1QBP)), ma(cat)) -> rxn(reactants(complex(p(HGNC:KNG1), p(HGNC:KLKB1), p(HGNC:C1QBP))), products(p(HGNC:KLKB1), p(HGNC:KNG1), complex(p(HGNC:C1QBP), p(HM:"activated KNG1"))))
+
+act(complex(p(HGNC:KLKB1), p(HGNC:KNG1), p(HGNC:C1QBP)), ma(cat)) -> rxn(reactants(p(HGNC:F12)), products(p(HM:"F12a")))
+
+rxn(reactants(p(HM:"GPIb-IX-V"), p(HGNC:F11)), products(complex(p(HM:"GPIb-IX-V"), p(HGNC:F11))))
+
+act(p(HM:"F12a"), ma(cat)) -> rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:F11))), products(complex(p(HM:"GPIb-IX-V"), p(HM:"F11a"))))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:F11))), products(complex(p(HM:"GPIb-IX-V"), p(HM:"F11a"))))
+
+translocation(p(HGNC:F9), fromLoc(GO:0005788 ! "endoplasmic reticulum lumen"), toLoc(GO:0005576 ! "extracellular region"))
+
+act(complex(p(HM:"GPIb-IX-V"), p(HM:"F11a")), ma(cat)) -> rxn(reactants(p(HGNC:F9)), products(p(HM:"F9a")))
+
+translocation(p(HGNC:F8), fromLoc(GO:0005788 ! "endoplasmic reticulum lumen"), toLoc(GO:0005576 ! "extracellular region"))
+
+rxn(reactants(p(HGNC:F8), p(HGNC:VWF)), products(complex(p(HGNC:F8), p(HGNC:VWF))))
+
+a(HM:"F2a inhibitors") association p(HM:"F2a")
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+
+complex(a(CHEBI:GAG), p(HGNC:SERPINE2), p(HM:"F2a")) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+complex(p(HM:"F2a"), p(HGNC:SERPIND1)) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+complex(p(HM:"F2a"), p(HM:"cleaved SERPINC1")) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+complex(p(HM:"activated protein C"), p(HGNC:SERPINA5)) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF)))
+complex(a(HM:"F2a inhibitors"), p(HM:"F2a")) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+
+act(a(CHEBI:"Ca2+")) -> rxn(reactants(p(HM:"F8a"), p(HM:"F9a")), products(complex(p(HM:"F8a"), p(HM:"F9a"))))
+
+act(complex(p(HM:"F8a"), p(HM:"F9a")), ma(cat)) -> rxn(reactants(p(HGNC:F10), a(CHEBI:"Ca2+")), products(p(HM:"F10a")))
+
+translocation(p(HGNC:SERPING1), fromLoc(GO:0005788 ! "endoplasmic reticulum lumen"), toLoc(GO:0005576 ! "extracellular region"))
+
+rxn(reactants(p(HGNC:KLKB1), p(HGNC:SERPING1)), products(complex(p(HGNC:KLKB1), p(HGNC:SERPING1))))
+
+rxn(reactants(p(HM:"F12a"), p(HGNC:SERPING1)), products(complex(p(HM:"F12a"), p(HGNC:SERPING1))))
+
+rxn(reactants(p(HGNC:KLKB1), p(HGNC:A2M)), products(complex(p(HGNC:KLKB1), p(HGNC:A2M))))
+
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################
+
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "reactome"
+SET Pathway = "Common Pathway of Fibrin Clot Formation"
+SET PathwayID = "R-HSA-140875"
+
+act(p(HM:"F10a"), ma(cat)) -> rxn(reactants(p(HGNC:F2)), products(p(HM:"F2a")))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+
+complex(a(CHEBI:GAG), p(HGNC:SERPINE2), p(HM:"F2a")) -| rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+
+complex(p(HM:"F2a"), p(HGNC:SERPIND1)) -| rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+complex(p(HM:"F2a"), p(HM:"cleaved SERPINC1")) -| rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+complex(p(HM:"activated protein C"), p(HGNC:SERPINA5)) -| rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+
+rxn(reactants(p(HM:"F5a"), p(HM:"F10a")), products(complex(p(HM:"F5a"), p(HM:"F10a"))))
+
+act(complex(p(HM:"F5a"), p(HM:"F10a")), ma(cat)) -> rxn(reactants(p(HGNC:F2)), products(p(HM:"F2a")))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(a(MESH:Fibrinogen)), products(a(HM:"Fibrin")))
+
+complex(p(HM:"F2a"), p(HGNC:SERPIND1)) -| rxn(reactants(a(MESH:Fibrinogen)), products(a(HM:"Fibrin")))
+complex(p(HM:"F2a"), p(HM:"cleaved SERPINC1")) -| rxn(reactants(a(MESH:Fibrinogen)), products(a(HM:"Fibrin")))
+complex(p(HM:"activated protein C"), p(HGNC:SERPINA5)) -| rxn(reactants(a(MESH:Fibrinogen)), products(a(HM:"Fibrin")))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+
+complex(a(CHEBI:GAG), p(HGNC:SERPINE2), p(HM:"F2a")) -| rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+complex(p(HM:"F2a"), p(HGNC:SERPIND1)) -| rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+complex(p(HM:"F2a"), p(HM:"cleaved SERPINC1")) -| rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+complex(p(HM:"activated protein C"), p(HGNC:SERPINA5)) -| rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+
+a(HM:"Fibrin") -> rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+
+rxn(reactants(a(HM:"cleaved F13"), a(CHEBI:"Ca2+")), products(p(HGNC:F13B), p(HM:"F13a")))
+
+act(complex(a(HM:"cleaved F13"), a(CHEBI:"Ca2+")), ma(cat)) -> rxn(reactants(a(HM:"Fibrin")), products(a(HM:"Fibrin"), a(CHEBI:"NH4+")))
+
+rxn(reactants(p(HM:"F2a"), p(HGNC:THBD)), products(complex(p(HM:"F2a"), p(HGNC:THBD))))
+
+act(complex(p(HGNC:PROCR), p(HM:"activated protein C"))) -| rxn(reactants(p(HGNC:PROC), p(HGNC:PROCR)), products(complex(p(HGNC:PROC), p(HGNC:PROCR))))
+
+act(complex(p(HM:"F2a"), p(HGNC:THBD)), ma(cat)) -> rxn(reactants(complex(p(HGNC:PROC), p(HGNC:PROCR))), products(p(HGNC:PROC), complex(p(HGNC:PROCR), p(HM:"activated protein C"))))
+
+p(HGNC:PF4) -> rxn(reactants(complex(p(HGNC:PROC), p(HGNC:PROCR))), products(p(HGNC:PROC), complex(p(HGNC:PROCR), p(HM:"activated protein C"))))
+
+rxn(reactants(complex(p(HGNC:PROCR), p(HM:"activated protein C"))), products(p(HM:"activated protein C"), p(HGNC:PROCR)))
+
+rxn(reactants(p(HGNC:PROS1), p(HM:"activated protein C")), products(complex(p(HGNC:PROS1), p(HM:"activated protein C"))))
+
+act(complex(p(HGNC:PROS1), p(HM:"activated protein C")), ma(cat)) -> rxn(reactants(p(HM:"F5a")), products(complex(p(HGNC:F5), p(HM:"F5 intermediate form"))))
+
+act(complex(p(HGNC:PROS1), p(HM:"activated protein C")), ma(cat)) -> rxn(reactants(p(HM:"F5 intermediate form")), products(p(HGNC:F5)))
+
+act(complex(p(HGNC:PROS1), p(HM:"activated protein C")), ma(cat)) -> rxn(reactants(p(HM:"F8a")), products(p(HM:"inactivated F8"), p(HGNC:F8)))
+
+act(p(HGNC:F5), ma(cat)) -> rxn(reactants(p(HM:"F8a")), products(p(HM:"inactivated F8"), p(HGNC:F8)))
+
+a(CHEBI:GAG) -> rxn(reactants(p(HGNC:SERPIND1), p(HM:"F2a")), products(complex(p(HGNC:SERPIND1), p(HM:"F2a"))))
+
+rxn(reactants(p(HM:"F2a"), complex(p(HGNC:SERPINE2), a(CHEBI:GAG))), products(complex(p(HM:"F2a"), p(HGNC:SERPINE2), a(CHEBI:GAG))))
+
+a(CHEBI:GAG) -> rxn(reactants(p(HM:"activated protein C"), p(HGNC:SERPINA5)), products(complex(p(HM:"activated protein C"), p(HGNC:SERPINA5))))
+
+rxn(reactants(complex(p(HGNC:PROCR), p(HM:"activated protein C")), p(HGNC:F2R)), products(complex(p(HGNC:PROCR), p(HM:"activated protein C"), p(HGNC:F2R))))
+
+rxn(reactants(p(HM:"soluble PROCR"), p(HM:"activated protein C")), products(complex(p(HM:"soluble PROCR"), p(HM:"activated protein C"))))
+
+rxn(reactants(p(HM:"soluble PROCR"), complex(p(HGNC:CD177), p(HGNC:PRTN3))), products(complex(p(HM:"soluble PROCR"), p(HGNC:CD177), p(HGNC:PRTN3))))
+
+UNSET {Database, Pathway, PathwayID}
+
+################################################################################
+
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "reactome"
+SET Pathway = "Platelet Aggregation (Plug Formation)"
+SET PathwayID = "R-HSA-76009"
+
+rxn(reactants(complex(p(HGNC:RAP1), a(CHEBI:GDP)), a(CHEBI:GTP)), products(complex(p(HGNC:RAP1), a(CHEBI:GTP)), a(CHEBI:GDP)))
+
+rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril")), p(HM:"F2a")), products(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril"), p(HM:"F2a"))))
+
+rxn(reactants(p(HGNC:THPO), p(HGNC:MPL)), products(complex(p(HGNC:THPO), p(HGNC:MPL))))
+
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################
+
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "reactome"
+SET Pathway = "Platelet activation, signaling and aggregation"
+SET PathwayID = "R-HSA-76002"
+
+rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril")), p(HGNC:YWHAZ)), products(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril"), p(HGNC:YWHAZ))))
+
+rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril")), p(HGNC:FLNA)), products(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril"), p(HGNC:FLNA))))
+
+rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril")), p(HGNC:PIK3R1)), products(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril"), p(HGNC:PIK3R1))))
+
+rxn(reactants(p(HGNC:SRC), p(HGNC:RAF1)), products(complex(p(HGNC:SRC), p(HGNC:RAF1))))
+
+rxn(reactants(p(HGNC:YWHAZ), p(HGNC:RAF1)), products(complex(p(HGNC:YWHAZ), p(HGNC:RAF1))))
+
+rxn(reactants(p(HGNC:P2RY12), a(CHEBI:ADP)), products(complex(p(HGNC:P2RY12), a(CHEBI:ADP))))
+
+rxn(reactants(p(HGNC:AAMP), p(HGNC:TBXA2R)), products(complex(p(HGNC:AAMP), p(HGNC:TBXA2R))))
+
+rxn(reactants(p(HGNC:TXA2), p(HGNC:TBXA2R)), products(complex(p(HGNC:TXA2), p(HGNC:TBXA2R))))
+
+rxn(reactants(complex(p(HGNC:TXA2), p(HGNC:TBXA2R)), p(HGNC:GNA13)), products(complex(p(HGNC:TXA2), p(HGNC:TBXA2R), p(HGNC:GNA13))))
+
+rxn(reactants(complex(p(HGNC:TXA2), p(HGNC:TBXA2R)), p(HM:"GNG")), products(complex(p(HGNC:TXA2), p(HGNC:TBXA2R), p(HM:"GNG"))))
+
+rxn(reactants(complex(a(CHEBI:ADP), p(HGNC:P2RY12)), p(HM:"GNG")), products(complex(a(CHEBI:ADP), p(HGNC:P2RY12), p(HM:"GNG"))))
+
+rxn(reactants(p(HM:"pro-F2R")), products(p(HGNC:F2R), p(HM:"activated F2R")))
+
+rxn(reactants(p(HM:"pro-F2R")), products(p(HGNC:F2R), p(HM:"activated F2R")))
+
+rxn(reactants(p(HM:"GNG"), complex(p(HGNC:F2RL2), p(HGNC:F2RL3))), products(complex(p(HGNC:F2RL2), p(HGNC:F2RL3)), p(HM:"inactive GNG")))
+
+rxn(reactants(p(HGNC:ARRB1), p(HM:"activated F2")), products(complex(p(HGNC:ARRB1), p(HM:"activated F2"))))
+
+rxn(reactants(p(HGNC:ARRB2), p(HM:"activated F2")), products(complex(p(HGNC:ARRB2), p(HM:"activated F2"))))
+
+rxn(reactants(complex(p(HGNC:ARRB1), p(HM:"activated F2")), p(HGNC:MAPK1), p(HGNC:SRC)), products(complex(p(HGNC:ARRB1), p(HM:"activated F2"), p(HGNC:MAPK1), p(HGNC:SRC))))
+rxn(reactants(complex(p(HGNC:ARRB2), p(HM:"activated F2")), p(HGNC:MAPK1), p(HGNC:SRC)), products(complex(p(HGNC:ARRB2), p(HM:"activated F2"), p(HGNC:MAPK1), p(HGNC:SRC))))
+
+rxn(reactants(complex(p(HGNC:ARRB2), p(HM:"activated F2")), p(HGNC:MAPK3), p(HGNC:SRC)), products(complex(p(HGNC:ARRB2), p(HM:"activated F2"), p(HGNC:MAPK3), p(HGNC:SRC))))
+rxn(reactants(complex(p(HGNC:ARRB2), p(HM:"activated F2")), p(HGNC:MAPK3), p(HGNC:SRC)), products(complex(p(HGNC:ARRB2), p(HM:"activated F2"), p(HGNC:MAPK3), p(HGNC:SRC))))
+
+rxn(reactants(p(HGNC:SYK), p(HM:"VAV")), products(complex(p(HGNC:SYK), p(HM:"VAV"))))
+
+rxn(reactants(p(HGNC:LCP2), p(HM:"VAV")), products(complex(p(HGNC:LCP2), p(HM:"VAV"))))
+
+rxn(reactants(p(HGNC:PIP3), p(HM:"VAV")), products(complex(p(HGNC:PIP3), p(HM:"VAV"))))
+rxn(reactants(p(HGNC:PIP2), p(HM:"VAV")), products(complex(p(HGNC:PIP2), p(HM:"VAV"))))
+
+rxn(reactants(complex(p(HGNC:PIP3), p(HM:"VAV")), p(HGNC:PRKCZ)), products(complex(p(HGNC:PIP3), p(HM:"VAV"), p(HGNC:PRKCZ))))
+
+rxn(reactants(p(HGNC:G6B), complex(p(HGNC:PTPN6), p(HGNC:PTPN11))), products(p(HGNC:G6B), p(HGNC:PTPN6), p(HGNC:PTPN11)))
+
+rxn(reactants(p(HGNC:CLEC1B), p(HGNC:PDPN)), products(complex(p(HGNC:CLEC1B), p(HGNC:PDPN))))
+
+rxn(reactants(complex(p(HGNC:CLEC1B), p(HGNC:PDPN)), p(HGNC:SYK)), products(complex(p(HGNC:CLEC1B), p(HGNC:PDPN), p(HGNC:SYK))))
+
+rxn(reactants(complex(p(HGNC:RASGRP2), p(HGNC:RASGRP1)), p(HGNC:DAG), a(CHEBI:"Ca2+")), products(complex(p(HGNC:RASGRP2), p(HGNC:RASGRP1)), p(HGNC:DAG), a(CHEBI:"Ca2+")))
+
+p(HGNC:DAGL) -> rxn(reactants(p(HGNC:DAG)), products(p(HGNC:2AG)))
+
+UNSET {Database, Pathway, PathwayID}
+
+###############################################
+
+SET SupportingText = "Automatically added by PyBEL"
+composite(p(HGNC:ITPR1), p(HGNC:ITPR2), p(HGNC:ITPR3)) hasComponent p(HGNC:ITPR1)
+composite(p(HGNC:ITPR1), p(HGNC:ITPR2), p(HGNC:ITPR3)) hasComponent p(HGNC:ITPR2)
+composite(p(HGNC:ITPR1), p(HGNC:ITPR2), p(HGNC:ITPR3)) hasComponent p(HGNC:ITPR3)
+composite(p(HGNC:F2R), p(HGNC:F2RL3)) hasComponent p(HGNC:F2R)
+composite(p(HGNC:F2R), p(HGNC:F2RL3)) hasComponent p(HGNC:F2RL3)
+composite(p(HGNC:PLCB1), p(HGNC:PLCB2), p(HGNC:PLCB3), p(HGNC:PLCB4)) hasComponent p(HGNC:PLCB1)
+composite(p(HGNC:PLCB1), p(HGNC:PLCB2), p(HGNC:PLCB3), p(HGNC:PLCB4)) hasComponent p(HGNC:PLCB2)
+composite(p(HGNC:PLCB1), p(HGNC:PLCB2), p(HGNC:PLCB3), p(HGNC:PLCB4)) hasComponent p(HGNC:PLCB3)
+composite(p(HGNC:PLCB1), p(HGNC:PLCB2), p(HGNC:PLCB3), p(HGNC:PLCB4)) hasComponent p(HGNC:PLCB4)
+composite(p(HGNC:ITGA2), p(HGNC:ITGB1)) hasComponent p(HGNC:ITGA2)
+composite(p(HGNC:ITGA2), p(HGNC:ITGB1)) hasComponent p(HGNC:ITGB1)
+composite(p(HGNC:RASGRP1), p(HGNC:RASGRP2)) hasComponent p(HGNC:RASGRP1)
+composite(p(HGNC:RASGRP1), p(HGNC:RASGRP2)) hasComponent p(HGNC:RASGRP2)
+composite(p(HGNC:RAP1A), p(HGNC:RAP1B)) hasComponent p(HGNC:RAP1A)
+composite(p(HGNC:RAP1A), p(HGNC:RAP1B)) hasComponent p(HGNC:RAP1B)
+composite(p(HGNC:TLN1), p(HGNC:TLN2)) hasComponent p(HGNC:TLN1)
+composite(p(HGNC:TLN1), p(HGNC:TLN2)) hasComponent p(HGNC:TLN2)
+composite(p(HGNC:ITGA2B), p(HGNC:ITGB3)) hasComponent p(HGNC:ITGA2B)
+composite(p(HGNC:ITGA2B), p(HGNC:ITGB3)) hasComponent p(HGNC:ITGB3)
+composite(p(HGNC:PIK3CA), p(HGNC:PIK3CB), p(HGNC:PIK3CD), p(HGNC:PIK3R1), p(HGNC:PIK3R2), p(HGNC:PIK3R3)) hasComponent p(HGNC:PIK3CA)
+composite(p(HGNC:PIK3CA), p(HGNC:PIK3CB), p(HGNC:PIK3CD), p(HGNC:PIK3R1), p(HGNC:PIK3R2), p(HGNC:PIK3R3)) hasComponent p(HGNC:PIK3CB)
+composite(p(HGNC:PIK3CA), p(HGNC:PIK3CB), p(HGNC:PIK3CD), p(HGNC:PIK3R1), p(HGNC:PIK3R2), p(HGNC:PIK3R3)) hasComponent p(HGNC:PIK3CD)
+composite(p(HGNC:PIK3CA), p(HGNC:PIK3CB), p(HGNC:PIK3CD), p(HGNC:PIK3R1), p(HGNC:PIK3R2), p(HGNC:PIK3R3)) hasComponent p(HGNC:PIK3R1)
+composite(p(HGNC:PIK3CA), p(HGNC:PIK3CB), p(HGNC:PIK3CD), p(HGNC:PIK3R1), p(HGNC:PIK3R2), p(HGNC:PIK3R3)) hasComponent p(HGNC:PIK3R2)
+composite(p(HGNC:PIK3CA), p(HGNC:PIK3CB), p(HGNC:PIK3CD), p(HGNC:PIK3R1), p(HGNC:PIK3R2), p(HGNC:PIK3R3)) hasComponent p(HGNC:PIK3R3)
+composite(p(HGNC:AKT1), p(HGNC:AKT2), p(HGNC:AKT3)) hasComponent p(HGNC:AKT1)
+composite(p(HGNC:AKT1), p(HGNC:AKT2), p(HGNC:AKT3)) hasComponent p(HGNC:AKT2)
+composite(p(HGNC:AKT1), p(HGNC:AKT2), p(HGNC:AKT3)) hasComponent p(HGNC:AKT3)
+p(HGNC:NOS3) hasVariant p(HGNC:NOS3, pmod(Ph))
+composite(p(HGNC:GUCY1A1), p(HGNC:GUCY1A2), p(HGNC:GUCY1B1)) hasComponent p(HGNC:GUCY1A1)
+composite(p(HGNC:GUCY1A1), p(HGNC:GUCY1A2), p(HGNC:GUCY1B1)) hasComponent p(HGNC:GUCY1A2)
+composite(p(HGNC:GUCY1A1), p(HGNC:GUCY1A2), p(HGNC:GUCY1B1)) hasComponent p(HGNC:GUCY1B1)
+composite(p(HGNC:PRKG1), p(HGNC:PRKG2)) hasComponent p(HGNC:PRKG1)
+composite(p(HGNC:PRKG1), p(HGNC:PRKG2)) hasComponent p(HGNC:PRKG2)
+composite(p(HGNC:MAPK11), p(HGNC:MAPK12), p(HGNC:MAPK13), p(HGNC:MAPK14)) hasComponent p(HGNC:MAPK11)
+composite(p(HGNC:MAPK11), p(HGNC:MAPK12), p(HGNC:MAPK13), p(HGNC:MAPK14)) hasComponent p(HGNC:MAPK12)
+composite(p(HGNC:MAPK11), p(HGNC:MAPK12), p(HGNC:MAPK13), p(HGNC:MAPK14)) hasComponent p(HGNC:MAPK13)
+composite(p(HGNC:MAPK11), p(HGNC:MAPK12), p(HGNC:MAPK13), p(HGNC:MAPK14)) hasComponent p(HGNC:MAPK14)
+composite(p(HGNC:MAPK1), p(HGNC:MAPK3)) hasComponent p(HGNC:MAPK1)
+composite(p(HGNC:MAPK1), p(HGNC:MAPK3)) hasComponent p(HGNC:MAPK3)
+composite(p(HGNC:ARHGEF1), p(HGNC:ARHGEF12)) hasComponent p(HGNC:ARHGEF1)
+composite(p(HGNC:ARHGEF1), p(HGNC:ARHGEF12)) hasComponent p(HGNC:ARHGEF12)
+composite(p(HGNC:ROCK1), p(HGNC:ROCK2)) hasComponent p(HGNC:ROCK1)
+composite(p(HGNC:ROCK1), p(HGNC:ROCK2)) hasComponent p(HGNC:ROCK2)
+composite(p(HGNC:PPP1CA), p(HGNC:PPP1CB), p(HGNC:PPP1CC), p(HGNC:PPP1R12A)) hasComponent p(HGNC:PPP1CA)
+composite(p(HGNC:PPP1CA), p(HGNC:PPP1CB), p(HGNC:PPP1CC), p(HGNC:PPP1R12A)) hasComponent p(HGNC:PPP1CB)
+composite(p(HGNC:PPP1CA), p(HGNC:PPP1CB), p(HGNC:PPP1CC), p(HGNC:PPP1R12A)) hasComponent p(HGNC:PPP1CC)
+composite(p(HGNC:PPP1CA), p(HGNC:PPP1CB), p(HGNC:PPP1CC), p(HGNC:PPP1R12A)) hasComponent p(HGNC:PPP1R12A)
+composite(p(HGNC:MYL12A), p(HGNC:MYL12B)) hasComponent p(HGNC:MYL12A)
+composite(p(HGNC:MYL12A), p(HGNC:MYL12B)) hasComponent p(HGNC:MYL12B)
+composite(p(HGNC:MYLK), p(HGNC:MYLK2), p(HGNC:MYLK3), p(HGNC:MYLK4)) hasComponent p(HGNC:MYLK)
+composite(p(HGNC:MYLK), p(HGNC:MYLK2), p(HGNC:MYLK3), p(HGNC:MYLK4)) hasComponent p(HGNC:MYLK2)
+composite(p(HGNC:MYLK), p(HGNC:MYLK2), p(HGNC:MYLK3), p(HGNC:MYLK4)) hasComponent p(HGNC:MYLK3)
+composite(p(HGNC:MYLK), p(HGNC:MYLK2), p(HGNC:MYLK3), p(HGNC:MYLK4)) hasComponent p(HGNC:MYLK4)
+composite(p(HGNC:GNAI1), p(HGNC:GNAI2), p(HGNC:GNAI3)) hasComponent p(HGNC:GNAI1)
+composite(p(HGNC:GNAI1), p(HGNC:GNAI2), p(HGNC:GNAI3)) hasComponent p(HGNC:GNAI2)
+composite(p(HGNC:GNAI1), p(HGNC:GNAI2), p(HGNC:GNAI3)) hasComponent p(HGNC:GNAI3)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY1)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY2)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY3)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY4)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY5)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY6)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY7)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY8)
+composite(p(HGNC:ADCY1), p(HGNC:ADCY2), p(HGNC:ADCY3), p(HGNC:ADCY4), p(HGNC:ADCY5), p(HGNC:ADCY6), p(HGNC:ADCY7), p(HGNC:ADCY8), p(HGNC:ADCY9)) hasComponent p(HGNC:ADCY9)
+composite(p(HGNC:PIK3CG), p(HGNC:PIK3R5), p(HGNC:PIK3R6)) hasComponent p(HGNC:PIK3CG)
+composite(p(HGNC:PIK3CG), p(HGNC:PIK3R5), p(HGNC:PIK3R6)) hasComponent p(HGNC:PIK3R5)
+composite(p(HGNC:PIK3CG), p(HGNC:PIK3R5), p(HGNC:PIK3R6)) hasComponent p(HGNC:PIK3R6)
+composite(p(HGNC:PLA2G4A), p(HGNC:PLA2G4B), p(HGNC:PLA2G4B), p(HGNC:PLA2G4C), p(HGNC:PLA2G4D), p(HGNC:PLA2G4E), p(HGNC:PLA2G4F)) hasComponent p(HGNC:PLA2G4A)
+composite(p(HGNC:PLA2G4A), p(HGNC:PLA2G4B), p(HGNC:PLA2G4B), p(HGNC:PLA2G4C), p(HGNC:PLA2G4D), p(HGNC:PLA2G4E), p(HGNC:PLA2G4F)) hasComponent p(HGNC:PLA2G4B)
+composite(p(HGNC:PLA2G4A), p(HGNC:PLA2G4B), p(HGNC:PLA2G4B), p(HGNC:PLA2G4C), p(HGNC:PLA2G4D), p(HGNC:PLA2G4E), p(HGNC:PLA2G4F)) hasComponent p(HGNC:PLA2G4C)
+composite(p(HGNC:PLA2G4A), p(HGNC:PLA2G4B), p(HGNC:PLA2G4B), p(HGNC:PLA2G4C), p(HGNC:PLA2G4D), p(HGNC:PLA2G4E), p(HGNC:PLA2G4F)) hasComponent p(HGNC:PLA2G4D)
+composite(p(HGNC:PLA2G4A), p(HGNC:PLA2G4B), p(HGNC:PLA2G4B), p(HGNC:PLA2G4C), p(HGNC:PLA2G4D), p(HGNC:PLA2G4E), p(HGNC:PLA2G4F)) hasComponent p(HGNC:PLA2G4E)
+composite(p(HGNC:PLA2G4A), p(HGNC:PLA2G4B), p(HGNC:PLA2G4B), p(HGNC:PLA2G4C), p(HGNC:PLA2G4D), p(HGNC:PLA2G4E), p(HGNC:PLA2G4F)) hasComponent p(HGNC:PLA2G4F)
+composite(p(HGNC:PRKACA), p(HGNC:PRKACB), p(HGNC:PRKACG)) hasComponent p(HGNC:PRKACA)
+composite(p(HGNC:PRKACA), p(HGNC:PRKACB), p(HGNC:PRKACG)) hasComponent p(HGNC:PRKACB)
+composite(p(HGNC:PRKACA), p(HGNC:PRKACB), p(HGNC:PRKACG)) hasComponent p(HGNC:PRKACG)
+p(HGNC:VASP) hasVariant p(HGNC:VASP, pmod(Ph))
+composite(p(HGNC:ACTB), p(HGNC:ACTG1)) hasComponent p(HGNC:ACTB)
+composite(p(HGNC:ACTB), p(HGNC:ACTG1)) hasComponent p(HGNC:ACTG1)
+composite(p(HGNC:COL1A1), p(HGNC:COL1A2), p(HGNC:COL3A1)) hasComponent p(HGNC:COL1A1)
+composite(p(HGNC:COL1A1), p(HGNC:COL1A2), p(HGNC:COL3A1)) hasComponent p(HGNC:COL1A2)
+composite(p(HGNC:COL1A1), p(HGNC:COL1A2), p(HGNC:COL3A1)) hasComponent p(HGNC:COL3A1)
+
+p(HGNC:FCER1G) hasVariant p(HGNC:FCER1G, pmod(Ph))
+composite(p(HGNC:PRKCI), p(HGNC:PRKCZ)) hasComponent p(HGNC:PRKCI)
+composite(p(HGNC:PRKCI), p(HGNC:PRKCZ)) hasComponent p(HGNC:PRKCZ)
+p(HGNC:ARHGAP35) hasVariant p(HGNC:ARHGAP35, pmod(Ph))
+complex(p(HGNC:BTK), p(HGNC:LCP2), p(HGNC:PLCG2)) hasComponent p(HGNC:BTK)
+complex(p(HGNC:BTK), p(HGNC:LCP2), p(HGNC:PLCG2)) hasComponent p(HGNC:LCP2)
+complex(p(HGNC:BTK), p(HGNC:LCP2), p(HGNC:PLCG2)) hasComponent p(HGNC:PLCG2)
+
+p(HGNC:C1QBP) partOf complex(p(HGNC:C1QBP), p(HGNC:KNG1))
+p(HGNC:KNG1) partOf complex(p(HGNC:C1QBP), p(HGNC:KNG1))
+
+complex(a(CHEBI:"Ca2+"), p(HGNC:F2)) hasComponent a(CHEBI:"Ca2+")
+complex(a(CHEBI:"Ca2+"), p(HGNC:F2)) hasComponent p(HGNC:F2)
+
+complex(p(HGNC:CD177), p(HGNC:PRTN3)) hasComponent p(HGNC:CD177)
+complex(p(HGNC:CD177), p(HGNC:PRTN3)) hasComponent p(HGNC:PRTN3)
+
+complex(a(REACTOME:"Collagen type I fibril"), p(HGNC:VWF)) hasComponent a(REACTOME:"Collagen type I fibril")
+complex(a(REACTOME:"Collagen type I fibril"), p(HGNC:VWF)) hasComponent p(HGNC:VWF)
+rxn(reactants(p(HGNC:MPL), p(HGNC:THPO)), products(complex(p(HGNC:MPL), p(HGNC:THPO))))
+rxn(reactants(p(HGNC:MPL), p(HGNC:THPO)), products(complex(p(HGNC:MPL), p(HGNC:THPO))))
+rxn(reactants(p(HGNC:MPL), p(HGNC:THPO)), products(complex(p(HGNC:MPL), p(HGNC:THPO))))
+complex(p(HGNC:MPL), p(HGNC:THPO)) hasComponent p(HGNC:MPL)
+complex(p(HGNC:MPL), p(HGNC:THPO)) hasComponent p(HGNC:THPO)
+
+p(HGNC:SNAP23)
+p(HGNC:VAMP8)
+bp(KEGG:"Renal cell carcinoma")
+bp(KEGG:"Calcium signaling pathway")
+bp(KEGG:"Rap1 signaling pathway")
+bp(KEGG:"Arachidonic acid metabolism")
+bp(KEGG:"Complement and coagulation cascades")
+bp(KEGG:"PI3K-Akt signaling pathway")
+bp(REACTOME:"Common Pathway of Fibrin Clot Formation")
+bp(REACTOME:"Extrinsic Pathway of Fibrin Clot Formation")
+bp(REACTOME:"Intrinsic Pathway of Fibrin Clot Formation")
+bp(REACTOME:"Response to elevated platelet cytosolic Ca2+")
+bp(REACTOME:"Platelet Aggregation (Plug Formation)")
+bp(REACTOME:"Effects of PIP2 hydrolysis")
+bp(REACTOME:"GPVI-mediated activation cascade")
+bp(REACTOME:"Thrombin signalling through proteinase activated receptors (PARs)")
+bp(REACTOME:"Signal amplification")
+bp(REACTOME:"GP1b-IX-V activation signalling")
+bp(REACTOME:"Adrenaline signalling through Alpha-2 adrenergic receptor")
+bp(REACTOME:"Integrin alphaIIb beta3 signaling")
+

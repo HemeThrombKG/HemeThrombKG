@@ -1,0 +1,98 @@
+# This document was created by PyBEL v0.13.1 and bel-resources v0.0.1 on Wed Apr 27 14:52:11 2022
+
+# This document was created by PyBEL v0.0.1 on Wed Apr 27 14:52:11 2022
+
+################################################################################
+#| Metadata
+################################################################################
+
+SET DOCUMENT Name = "Graph from ['R-HSA-140837']"
+SET DOCUMENT Version = "0.0.0"
+SET DOCUMENT Description = "http://www.kegg.jp/kegg-bin/show_pathway?hsa04611"
+SET DOCUMENT Authors = "Daniel Domingo-Fernández, Josep Marín-Llaó and Sarah Mubeen"
+SET DOCUMENT ContactInfo = "daniel.domingo.fernandez@scai.fraunhofer.de"
+
+################################################################################
+#| Namespaces
+################################################################################
+
+# Enumerated Namespaces
+
+DEFINE NAMESPACE GOCC AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/go-cellular-component/go-cellular-component-20170511.belns"
+DEFINE NAMESPACE HGNC           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/hgnc-names.belns"
+DEFINE NAMESPACE CHEBI          AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/chebi-names.belns"
+DEFINE NAMESPACE GO             AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/go-names.belns"
+
+DEFINE NAMESPACE HM        AS PATTERN ".*"
+
+################################################################################
+#| Annotations
+################################################################################
+
+# Regular Expression Annotations
+
+DEFINE ANNOTATION Pathway     AS PATTERN ".*"
+DEFINE ANNOTATION PathwayID     AS PATTERN ".*"
+DEFINE ANNOTATION EdgeTypes     AS PATTERN ".*"
+
+DEFINE ANNOTATION Database AS LIST {"kegg", "reactome", "wikipathways"}
+
+################################################################################
+#| Statements
+################################################################################
+
+
+
+################################################################################
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "reactome"
+SET Pathway = "Intrinsic Pathway of Fibrin Clot Formation"
+SET PathwayID = "R-HSA-140837"
+
+act(a(CHEBI:"Zn2+")) -> rxn(reactants(p(HGNC:KNG1),p(HGNC:C1QBP)), products(complex(p(HGNC:KNG1),p(HGNC:C1QBP))))
+
+rxn(reactants(complex(p(HGNC:KNG1),p(HGNC:KLKB1), p(HGNC:C1QBP))), products(complex(p(HGNC:KNG1), p(HGNC:KLKB1), p(HGNC:C1QBP))))
+
+act(complex(p(HGNC:KLKB1), p(HGNC:KNG1), p(HGNC:C1QBP)), ma(cat)) -> rxn(reactants(complex(p(HGNC:KNG1), p(HGNC:KLKB1), p(HGNC:C1QBP))), products(p(HGNC:KLKB1), p(HGNC:KNG1), complex(p(HGNC:C1QBP), p(HM:"activated KNG1"))))
+
+act(complex(p(HGNC:KLKB1), p(HGNC:KNG1), p(HGNC:C1QBP)), ma(cat)) -> rxn(reactants(p(HGNC:F12)), products(p(HM:"F12a")))
+
+rxn(reactants(p(HM:"GPIb-IX-V"), p(HGNC:F11)), products(complex(p(HM:"GPIb-IX-V"), p(HGNC:F11))))
+
+act(p(HM:"F12a"), ma(cat)) -> rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:F11))), products(complex(p(HM:"GPIb-IX-V"), p(HM:"F11a"))))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:F11))), products(complex(p(HM:"GPIb-IX-V"), p(HM:"F11a"))))
+
+translocation(p(HGNC:F9), fromLoc(GO:0005788 ! "endoplasmic reticulum lumen"), toLoc(GO:0005576 ! "extracellular region"))
+
+act(complex(p(HM:"GPIb-IX-V"), p(HM:"F11a")), ma(cat)) -> rxn(reactants(p(HGNC:F9)), products(p(HM:"F9a")))
+
+translocation(p(HGNC:F8), fromLoc(GO:0005788 ! "endoplasmic reticulum lumen"), toLoc(GO:0005576 ! "extracellular region"))
+
+rxn(reactants(p(HGNC:F8), p(HGNC:VWF)), products(complex(p(HGNC:F8), p(HGNC:VWF))))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+
+complex(a(CHEBI:GAG), p(HGNC:SERPINE2), p(HM:"F2a")) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+complex(p(HM:"F2a"), p(HGNC:SERPIND1)) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+complex(p(HM:"F2a"), p(HM:"cleaved SERPINC1")) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF), p(HM:"F8a")))
+complex(p(HM:"activated protein C"), p(HGNC:SERPINA5)) -| rxn(reactants(complex(p(HGNC:F8), p(HGNC:VWF))), products(p(HGNC:VWF)))
+
+act(a(CHEBI:"Ca2+")) -> rxn(reactants(p(HM:"F8a"), p(HM:"F9a")), products(complex(p(HM:"F8a"), p(HM:"F9a"))))
+
+act(complex(p(HM:"F8a"), p(HM:"F9a")), ma(cat)) -> rxn(reactants(p(HGNC:F10), a(CHEBI:"Ca2+")), products(p(HM:"F10a")))
+
+translocation(p(HGNC:SERPING1), fromLoc(GO:0005788 ! "endoplasmic reticulum lumen"), toLoc(GO:0005576 ! "extracellular region"))
+
+rxn(reactants(p(HGNC:KLKB1), p(HGNC:SERPING1)), products(complex(p(HGNC:KLKB1), p(HGNC:SERPING1))))
+
+rxn(reactants(p(HM:"F12a"), p(HGNC:SERPING1)), products(complex(p(HM:"F12a"), p(HGNC:SERPING1))))
+
+rxn(reactants(p(HGNC:KLKB1), p(HGNC:A2M)), products(complex(p(HGNC:KLKB1), p(HGNC:A2M))))
+
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################

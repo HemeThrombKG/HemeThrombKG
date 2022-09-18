@@ -1,0 +1,121 @@
+# This document was created by PyBEL v0.13.1 and bel-resources v0.0.1 on Wed Apr 27 14:52:11 2022
+
+# This document was created by PyBEL v0.0.1 on Wed Apr 27 14:52:11 2022
+
+################################################################################
+#| Metadata
+################################################################################
+
+SET DOCUMENT Name = "Merged graph from ['R-HSA-140875']"
+SET DOCUMENT Version = "0.0.0"
+SET DOCUMENT Description = "http://www.kegg.jp/kegg-bin/show_pathway?hsa04611"
+SET DOCUMENT Authors = "Daniel Domingo-Fernández, Josep Marín-Llaó and Sarah Mubeen"
+SET DOCUMENT ContactInfo = "daniel.domingo.fernandez@scai.fraunhofer.de"
+
+################################################################################
+#| Namespaces
+################################################################################
+
+# Enumerated Namespaces
+
+DEFINE NAMESPACE GOCC AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/go-cellular-component/go-cellular-component-20170511.belns"
+DEFINE NAMESPACE HGNC           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/hgnc-names.belns"
+DEFINE NAMESPACE CHEBI          AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/chebi-names.belns"
+DEFINE NAMESPACE GO             AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/go-names.belns"
+
+DEFINE NAMESPACE HM        AS PATTERN ".*"
+
+################################################################################
+#| Annotations
+################################################################################
+
+# Regular Expression Annotations
+
+DEFINE ANNOTATION Pathway     AS PATTERN ".*"
+DEFINE ANNOTATION PathwayID     AS PATTERN ".*"
+DEFINE ANNOTATION EdgeTypes     AS PATTERN ".*"
+
+DEFINE ANNOTATION Database AS LIST {"kegg", "reactome", "wikipathways"}
+
+################################################################################
+#| Statements
+################################################################################
+
+
+################################################################################
+
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "reactome"
+SET Pathway = "Common Pathway of Fibrin Clot Formation"
+SET PathwayID = "R-HSA-140875"
+
+act(p(HM:"F10a"), ma(cat)) -> rxn(reactants(p(HGNC:F2)), products(p(HM:"F2a")))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+
+complex(a(CHEBI:GAG), p(HGNC:SERPINE2), p(HM:"F2a")) -| rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+
+complex(p(HM:"F2a"), p(HGNC:SERPIND1)) -| rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+complex(p(HM:"F2a"), p(HM:"cleaved SERPINC1")) -| rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+complex(p(HM:"activated protein C"), p(HGNC:SERPINA5)) -| rxn(reactants(p(HGNC:F5)), products(p(HM:"F5a")))
+
+rxn(reactants(p(HM:"F5a"), p(HM:"F10a")), products(complex(p(HM:"F5a"), p(HM:"F10a"))))
+
+act(complex(p(HM:"F5a"), p(HM:"F10a")), ma(cat)) -> rxn(reactants(p(HGNC:F2)), products(p(HM:"F2a")))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(a(MESH:Fibrinogen)), products(a(HM:"Fibrin")))
+
+complex(p(HM:"F2a"), p(HGNC:SERPIND1)) -| rxn(reactants(a(MESH:Fibrinogen)), products(a(HM:"Fibrin")))
+complex(p(HM:"F2a"), p(HM:"cleaved SERPINC1")) -| rxn(reactants(a(MESH:Fibrinogen)), products(a(HM:"Fibrin")))
+complex(p(HM:"activated protein C"), p(HGNC:SERPINA5)) -| rxn(reactants(a(MESH:Fibrinogen)), products(a(HM:"Fibrin")))
+
+act(p(HM:"F2a"), ma(cat)) -> rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+
+complex(a(CHEBI:GAG), p(HGNC:SERPINE2), p(HM:"F2a")) -| rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+complex(p(HM:"F2a"), p(HGNC:SERPIND1)) -| rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+complex(p(HM:"F2a"), p(HM:"cleaved SERPINC1")) -| rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+complex(p(HM:"activated protein C"), p(HGNC:SERPINA5)) -| rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+
+a(HM:"Fibrin") -> rxn(reactants(p(HGNC:F13)), products(a(HM:"cleaved F13")))
+
+rxn(reactants(a(HM:"cleaved F13"), a(CHEBI:"Ca2+")), products(p(HGNC:F13B), p(HM:"F13a")))
+
+act(complex(a(HM:"cleaved F13"), a(CHEBI:"Ca2+")), ma(cat)) -> rxn(reactants(a(HM:"Fibrin")), products(a(HM:"Fibrin"), a(CHEBI:"NH4+")))
+
+rxn(reactants(p(HM:"F2a"), p(HGNC:THBD)), products(complex(p(HM:"F2a"), p(HGNC:THBD))))
+
+act(complex(p(HGNC:PROCR), p(HM:"activated protein C"))) -| rxn(reactants(p(HGNC:PROC), p(HGNC:PROCR)), products(complex(p(HGNC:PROC), p(HGNC:PROCR))))
+
+act(complex(p(HM:"F2a"), p(HGNC:THBD)), ma(cat)) -> rxn(reactants(complex(p(HGNC:PROC), p(HGNC:PROCR))), products(p(HGNC:PROC), complex(p(HGNC:PROCR), p(HM:"activated protein C"))))
+
+p(HGNC:PF4) -> rxn(reactants(complex(p(HGNC:PROC), p(HGNC:PROCR))), products(p(HGNC:PROC), complex(p(HGNC:PROCR), p(HM:"activated protein C"))))
+
+rxn(reactants(complex(p(HGNC:PROCR), p(HM:"activated protein C"))), products(p(HM:"activated protein C"), p(HGNC:PROCR)))
+
+rxn(reactants(p(HGNC:PROS1), p(HM:"activated protein C")), products(complex(p(HGNC:PROS1), p(HM:"activated protein C"))))
+
+act(complex(p(HGNC:PROS1), p(HM:"activated protein C")), ma(cat)) -> rxn(reactants(p(HM:"F5a")), products(complex(p(HGNC:F5), p(HM:"F5 intermediate form"))))
+
+act(complex(p(HGNC:PROS1), p(HM:"activated protein C")), ma(cat)) -> rxn(reactants(p(HM:"F5 intermediate form")), products(p(HGNC:F5)))
+
+act(complex(p(HGNC:PROS1), p(HM:"activated protein C")), ma(cat)) -> rxn(reactants(p(HM:"F8a")), products(p(HM:"inactivated F8"), p(HGNC:F8)))
+
+act(p(HGNC:F5), ma(cat)) -> rxn(reactants(p(HM:"F8a")), products(p(HM:"inactivated F8"), p(HGNC:F8)))
+
+a(CHEBI:GAG) -> rxn(reactants(p(HGNC:SERPIND1), p(HM:"F2a")), products(complex(p(HGNC:SERPIND1), p(HM:"F2a"))))
+
+rxn(reactants(p(HM:"F2a"), complex(p(HGNC:SERPINE2), a(CHEBI:GAG))), products(complex(p(HM:"F2a"), p(HGNC:SERPINE2), a(CHEBI:GAG))))
+
+a(CHEBI:GAG) -> rxn(reactants(p(HM:"activated protein C"), p(HGNC:SERPINA5)), products(complex(p(HM:"activated protein C"), p(HGNC:SERPINA5))))
+
+rxn(reactants(complex(p(HGNC:PROCR), p(HM:"activated protein C")), p(HGNC:F2R)), products(complex(p(HGNC:PROCR), p(HM:"activated protein C"), p(HGNC:F2R))))
+
+rxn(reactants(p(HM:"soluble PROCR"), p(HM:"activated protein C")), products(complex(p(HM:"soluble PROCR"), p(HM:"activated protein C"))))
+
+rxn(reactants(p(HM:"soluble PROCR"), complex(p(HGNC:CD177), p(HGNC:PRTN3))), products(complex(p(HM:"soluble PROCR"), p(HGNC:CD177), p(HGNC:PRTN3))))
+
+UNSET {Database, Pathway, PathwayID}
+
+################################################################################

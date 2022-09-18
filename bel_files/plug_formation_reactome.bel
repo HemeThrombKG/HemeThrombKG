@@ -1,0 +1,62 @@
+# This document was created by PyBEL v0.13.1 and bel-resources v0.0.1 on Wed Apr 27 14:52:11 2022
+
+# This document was created by PyBEL v0.0.1 on Wed Apr 27 14:52:11 2022
+
+################################################################################
+#| Metadata
+################################################################################
+
+SET DOCUMENT Name = "Graph from ['R-HSA-76009']"
+SET DOCUMENT Version = "0.0.0"
+SET DOCUMENT Description = "http://www.kegg.jp/kegg-bin/show_pathway?hsa04611"
+SET DOCUMENT Authors = "Daniel Domingo-Fernández, Josep Marín-Llaó and Sarah Mubeen"
+SET DOCUMENT ContactInfo = "daniel.domingo.fernandez@scai.fraunhofer.de"
+
+################################################################################
+#| Namespaces
+################################################################################
+
+# Enumerated Namespaces
+
+DEFINE NAMESPACE GOCC AS URL "https://arty.scai.fraunhofer.de/artifactory/bel/namespace/go-cellular-component/go-cellular-component-20170511.belns"
+DEFINE NAMESPACE HGNC           AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/hgnc-names.belns"
+DEFINE NAMESPACE CHEBI          AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/chebi-names.belns"
+DEFINE NAMESPACE GO             AS URL "https://raw.githubusercontent.com/pharmacome/terminology/b46b65c3da259b6e86026514dfececab7c22a11b/external/go-names.belns"
+
+DEFINE NAMESPACE HM        AS PATTERN ".*"
+
+################################################################################
+#| Annotations
+################################################################################
+
+# Regular Expression Annotations
+
+DEFINE ANNOTATION Pathway     AS PATTERN ".*"
+DEFINE ANNOTATION PathwayID     AS PATTERN ".*"
+DEFINE ANNOTATION EdgeTypes     AS PATTERN ".*"
+
+DEFINE ANNOTATION Database AS LIST {"kegg", "reactome", "wikipathways"}
+
+################################################################################
+#| Statements
+################################################################################
+
+
+################################################################################
+SET Citation = {"PubMed", "123123123"}
+
+SET SupportingText = "KEGG edge."
+SET Database = "reactome"
+SET Pathway = "Platelet Aggregation (Plug Formation)"
+SET PathwayID = "R-HSA-76009"
+
+rxn(reactants(complex(p(HGNC:RAP1), a(CHEBI:GDP)), a(CHEBI:GTP)), products(complex(p(HGNC:RAP1), a(CHEBI:GTP)), a(CHEBI:GDP)))
+
+rxn(reactants(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril")), p(HM:"F2a")), products(complex(p(HM:"GPIb-IX-V"), p(HGNC:VWF), p(HM:"Collagen type I fibril"), p(HM:"F2a"))))
+
+rxn(reactants(p(HGNC:THPO), p(HGNC:MPL)), products(complex(p(HGNC:THPO), p(HGNC:MPL))))
+
+UNSET {Database, Pathway, PathwayID}
+
+
+################################################################################
