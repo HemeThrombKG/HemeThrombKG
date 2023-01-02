@@ -51,15 +51,14 @@ The folder structure of this repository is organized as follows:
         └── intracellular_proteins.tsv
 
 
-
 References
 ----------
 
-.. [1] Mubeen S., Domingo-Fernandez D., Díaz del Ser S., Solanki D., Kodamullil A.T., Hofmann-Apitius M.,
-    Hopp M.T., and Imhof D. [*]_ (2022). Exploring the complex
-    network of heme-triggered effects on the blood coagulation system. *Preprint.*
+.. [1] Mubeen S., Domingo-Fernandez D., Díaz del Ser S., Solanki D.M., Kodamullil A.T., Hofmann-Apitius M.,
+    Hopp M.T., and Imhof D. [*]_ (2022). `Exploring the complex
+    network of heme-triggered effects on the blood coagulation system <https://doi.org/10.3390/jcm11195975>`_. Journal of Clinical Medicine. 11(19), 5975.
 
-.. [2] Hopp M.T., and Imhof D. (2021). Disease networks. `Linking Labile Heme with Thrombosis <https://doi.org/10.3390/jcm10030427>`_. Journal of Clinical Medicine. 10(3), 427.
+.. [2] Hopp M.T., and Imhof D. (2021). `Linking Labile Heme with Thrombosis <https://doi.org/10.3390/jcm10030427>`_. Journal of Clinical Medicine. 10(3), 427.
 
 
 .. [*] Hopp M.T., and Imhof D. have contributed equally to this work.
